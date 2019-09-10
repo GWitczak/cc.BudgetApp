@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "fomantic-ui": "^2.7.8"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
