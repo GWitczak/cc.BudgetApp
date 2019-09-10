@@ -1,0 +1,35 @@
+:root {
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-primary: #EDA115;
+    --color-primary-light: #FCD237;
+    --color-secondary: #73471C;
+
+    --color-error: rgb(250, 70, 25);
+
+    --color-text: #666;
+    --color-gray-1: #f4f4f4;
+    --color-gray-2: #eee;
+    --color-gray-3: #7E7463;
+    --color-gray-4: #2C2319;
+
+    --padding-big: 3rem;
+    --padding: 1.5rem;
+    --padding-small: 1rem;
+
+    --margin: 3rem;
+    --margin-medium: 1.5rem;
+    --margin-small: 1rem;
+
+    --box-shadow-color: rgba(0, 0, 0, 0.6);
+    --box-shadow--small: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+// Wartości dla media queries:
+// 75em;        1200/16
+// 70em;        1120/16
+// 68.75em;     1100/16
+// 56.25em;     900/16
+// 37.5em;      600/16
+// 31.25em;     500/16

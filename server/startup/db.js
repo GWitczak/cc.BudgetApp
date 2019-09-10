@@ -1,0 +1,1 @@
+// logika podlaczenia bazy
