@@ -1,18 +1,18 @@
 :root {
     --color-white: #fff;
-    --color-black: #000;
+    --color-white-opa: rgb(255, 255, 255, 0.88)
+    --color-black: #221F1F;
 
-    --color-primary: #EDA115;
-    --color-primary-light: #FCD237;
+    --color-primary: #F1DF4A;
+    --color-primary-light: rgb(241, 223, 74, 0.88);
     --color-secondary: #73471C;
 
     --color-error: rgb(250, 70, 25);
 
-    --color-text: #666;
-    --color-gray-1: #f4f4f4;
-    --color-gray-2: #eee;
-    --color-gray-3: #7E7463;
-    --color-gray-4: #2C2319;
+    --color-text: #6A6262;
+    --color-gray-1: rgb(167, 153, 153, 0.76);
+    --color-gray-2: rgb(206, 199, 199, 0.88);
+    --color-gray-3: rgb(167, 153, 153, 0.88);
 
     --padding-big: 3rem;
     --padding: 1.5rem;
