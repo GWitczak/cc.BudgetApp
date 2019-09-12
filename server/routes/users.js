@@ -36,8 +36,12 @@ router.post('/', async (req, res) => {
 
         // Create and save User
         user = new User({
+            name: req.body.name,
             email: req.body.email,
             password: hashedPass,
+            wallet: req.body.wallet,
+            history: req.body.history,
+            isAdmin: req.body.isAdmin
         })
 
         await user.save();
@@ -48,7 +52,11 @@ router.post('/', async (req, res) => {
         // Return user.email
         res.header('x-auth-token', token).send({
             _id: user._id,
-            email: user.email
+            email: user.email,
+            name: user.name,
+            wallet: user.wallet,
+            history: user.history,
+            isAdmin: user.isAdmin
         })
 
     } catch (ex) {
