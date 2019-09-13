@@ -1,10 +1,25 @@
-// importy routerow
 const express = require('express');
-const test = require('../routes/tests')
+
+// importy routerow
+const testRouter = require('../routes/tests')
+const userRouter = require('../routes/users');
+const loginRouter = require('../routes/login');
+
 const error = require('../middleware/error');
 
 module.exports = function(app) {
+
+  //Decode req
   app.use(express.json());
-  app.use('/api/tests', test);
+
+
+  //All routes
+  app.use('/api/users', userRouter);
+  app.use('/api/login', loginRouter);
+  
+  app.use('/api/tests', testRouter);
+
+
+  // Errors handler
   app.use(error);
 }
