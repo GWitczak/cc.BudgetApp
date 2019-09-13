@@ -1,0 +1,45 @@
+Główne założenie to rozdzielenie logiki poszczególnych kontrolerów oraz (z racji tego, że tylko MainCtrl posiada dostęp do WSZYSTKICH pozostałych kontrolerów) możliwość zwracania niezbędnych informacji z poziomu zwykłych ctrl właśnie do głównego MainCtrl
+
+Przykład przepływu informacji dla scenariusza:
+
+1.
+Użytkownik odpala aplikację i z menu wybiera "Historia transakcji"
+Oczekiwany wynik: renderujemy listę transakcji
+
+Założenia:
+    - menu jest ZAWSZE widocznie
+
+    - listener powinien zostać ustawiony w MenuCtrl, ponieważ jest to część logiki tego elementu
+
+    - na podstawie tego co wybrał użytkownik powinniśmy załadować odpowiedni ctrl, który dynamicznie pobierze niezbędne informacje z api i wyświetli je na froncie
+
+    - aby móc wykonać powyższy podpunkt niezbędne jest przekazanie informacji o tym co zostało kliknięte do miejsca, które posiada dostęp do odpowiedniego ctrl, takim miejcem jest MainCtrl
+
+    - aby móc to zrobić skorzystamy w projekcie z callbacków, czyli funkcji przekazywanych jako parametry
+
+
+
+Praktyka:
+    - funkcje będące callbackami definiujemy w MainCtrl np: menuClickCallback, moreHistoryClickCallback
+
+    - callbacki te przekazujemy w kilku etapach do odpowiednich funkcji w podkontrolerach
+
+    - każdy ctrl posiada funkcje init(), więc w pierwszej kolejności cb (callback) przekazujemy właśnie tam (możemy przekazać od 0 do xx cb zależnie od potrzeb).
+    UWAGA - w tym miejscu NIEZBĘDNE jest zastosowanie techniki bindowania czyli fb.bind(this), pozwala nam to mimo przekazywania callbacka do innych obiektów zachowania właściwego this, które w callbacku powinny wskazywać na obiekt MainCtrl inaczej cała ta zabawa nie miałaby sensu :)
+
+    - cb powinny być odpalane podczas odpowiednich akcji, a więc dalej przekazujemy je do _setListeners będących prywatnymi funkcjami odpowiednich kontrolerów, następnie w celu zachowania odrębności zadań do odpowiednich funkcji kontrolerów
+
+    - w takich funkcjach implementowana jest wewnętrzna logika, a w momencie, gdy zajdzie potrzeba przesłania informacji do MainCtrl odpalamy przekazanego cb przekazując mu jako parametry: zmienne/obiekty/itp.
+
+
+
+callback flow:
+    - cb w MainCtrl -> przekazany do menuCtrl.init(cb)
+
+    - dalej w init przekazywany jest do -> _setListeners(cb)
+
+    - w _setListeners cb przypisany jest do odpowiedniego zdarzenia (może być ich więcej) w naszym przypadku do -> _clickHandler
+
+    - w _clickHandler nie mamy logiki, jednak w innym przypadku może ona wystąpić, do cb przekazujemy event.target wskazujący kliknięty element
+
+    - w wyniku czego cb napisany w MainCtrl otrzymuje informacje o klikniętym elemencie, a jednocześnie ma w scopie wszystkie niezbędne do wywołania kontrolery
