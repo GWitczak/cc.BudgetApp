@@ -4,11 +4,12 @@ const { DebitCard } = require('../models/debitCard');
 const { User } = require('../models/user');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth')
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
-  let user = await User.findOne({ email: req.body.userEmail });
-  if (!user) return res.status(404).send('User with the given e-mail not found.');
+  let user = await User.findOne({ _id: req.user._id });
+  if (!user) return res.status(404).send('User with the given id not found.');
 
   const type = req.body.type;
   let account
@@ -26,6 +27,26 @@ router.post('/', async (req, res) => {
 
   user = await user.save();
   
+  res.send(account);
+});
+
+router.delete('/:id', auth, async (req, res) => {
+  let user = await User.findOne({ _id: req.user._id });
+  let collection = user.wallet;
+
+  const idx = collection.findIndex((object) => {
+    return object._id == req.params.id
+  });
+
+  if (idx === -1) return res.status(404).send('The account with the given ID was not found.');
+
+  const account = collection[idx];
+  collection.splice(idx, 1);
+
+  console.log(collection);
+  user.wallet = collection;
+  user = await user.save();
+
   res.send(account);
 });
 

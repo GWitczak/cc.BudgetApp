@@ -13,12 +13,6 @@ const mongoose = require('mongoose');
     min: 5,
     max: 50
   },
-  id: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 9999
-  },
   balance: {
     type: Number,
     default: 0,
@@ -37,7 +31,6 @@ accountSchema.statics.create = function create(account, res) {
     return new Account({ 
       type: account.type,
       name: account.name,
-      id: account.id,
       balance: account.balance
     });
 };
@@ -46,10 +39,8 @@ const Account = mongoose.model('Account', accountSchema)
 
 function validateAccount(account) {
   const schema = {
-    userEmail: Joi.string().min(5).max(50).email().required(),
     type: "account",
     name: Joi.string().min(5).max(50).required(),
-    id: Joi.number().min(1).max(9999).required(),
     balance: Joi.number().min(0).required()
   };
 

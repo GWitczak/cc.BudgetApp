@@ -30,9 +30,8 @@ const Cash = mongoose.model('Cash', cashSchema);
 
 function validateCash(cash) {
   const schema = {
-    userEmail: Joi.string().min(5).max(50).email().required(),
     type: "cash",
-    balance: Joi.number().min(0).required(),
+    balance: Joi.number().min(0).required()
   };
 
   return Joi.validate(cash, schema);

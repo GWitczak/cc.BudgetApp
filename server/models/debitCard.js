@@ -13,12 +13,6 @@ const debitSchema = new mongoose.Schema({
     min: 5,
     max: 50
   },
-  cardId: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 9999
-  },
   balance: {
     type: Number,
     default: 0,
@@ -43,7 +37,6 @@ debitSchema.statics.create = function createDebitCard(debitCard, res) {
   return new DebitCard({ 
     type: debitCard.type,
     owner: debitCard.owner,
-    cardId: debitCard.cardId,
     balance: debitCard.balance,
     maxDebit: debitCard.maxDebit
   });
@@ -53,10 +46,8 @@ const DebitCard = mongoose.model('DebitCard', debitSchema);
 
 function validateDebitCard(debitCard) {
   const schema = {
-    userEmail: Joi.string().min(5).max(50).email().required(),
     type: "debitCard",
     owner: Joi.string().min(5).max(50).required(),
-    cardId: Joi.number().min(1).max(9999).required(),
     balance: Joi.number().max(0).required(),
     maxDebit: Joi.number().min(0)
   };
