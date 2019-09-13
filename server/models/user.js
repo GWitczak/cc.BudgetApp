@@ -23,12 +23,13 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     wallet: {
-        accounts: Array, // [ accountSchema, cashSchema, debitCardSchema ],
-        globalBalance: { // getter
-            type: Number,
-            default: 0,
-            required: true
-        }
+        type: Array, // [ accountSchema, cashSchema, debitCardSchema ],
+        required: true
+    },
+    globalBalance: {
+        type: Number,
+        default: 0,
+        required: true
     },
     history: Array, //[ transactionSchema ],
     isAdmin: {

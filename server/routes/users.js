@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
             email: req.body.email,
             password: hashedPass,
             wallet: req.body.wallet,
+            globalBalance: req.body.globalBalance,
             history: req.body.history,
             isAdmin: req.body.isAdmin
         })
@@ -55,6 +56,7 @@ router.post('/', async (req, res) => {
             email: user.email,
             name: user.name,
             wallet: user.wallet,
+            globalBalance: user.globalBalance,
             history: user.history,
             isAdmin: user.isAdmin
         })

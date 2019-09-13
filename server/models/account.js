@@ -1,0 +1,59 @@
+const Joi = require('@hapi/joi');
+const mongoose = require('mongoose');
+
+ const accountSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: true,
+    match: /account/
+  },
+  name: {
+    type: String,
+    required: true,
+    min: 5,
+    max: 50
+  },
+  id: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 9999
+  },
+  balance: {
+    type: Number,
+    default: 0,
+    required: true
+  },
+  cards: {
+    type: Array,
+    required: true
+  }
+});
+
+accountSchema.statics.create = function create(account, res) {
+    const { error } = validateAccount(account); 
+    if (error) return res.status(400).send(error.details[0].message);
+  
+    return new Account({ 
+      type: account.type,
+      name: account.name,
+      id: account.id,
+      balance: account.balance
+    });
+};
+
+const Account = mongoose.model('Account', accountSchema)
+
+function validateAccount(account) {
+  const schema = {
+    userEmail: Joi.string().min(5).max(50).email().required(),
+    type: "account",
+    name: Joi.string().min(5).max(50).required(),
+    id: Joi.number().min(1).max(9999).required(),
+    balance: Joi.number().min(0).required()
+  };
+
+  return Joi.validate(account, schema);
+}
+
+exports.Account = Account; 
