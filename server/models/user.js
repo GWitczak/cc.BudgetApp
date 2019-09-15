@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
     },
     wallet: {
         type: Array, // [ accountSchema, cashSchema, debitCardSchema ],
-        required: true
     },
     globalBalance: {
         type: Number,
