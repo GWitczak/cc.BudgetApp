@@ -1,0 +1,75 @@
+.logged {
+    height: 100%;
+    background-image: url(../../assets/logged.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+
+    
+    &__header{
+        @include header;
+};
+    &__header h2{
+        font-size: 2.5rem;
+        position: absolute;
+        top: 30%;
+        left: 10%;
+    };
+
+    &__container {
+        @include container;
+    }
+
+    &__accounts {
+        width: 95%;
+        height: 10rem;
+        background-color: var(--color-gray-5);
+        color: var(--color-white);
+        margin: 0 auto;
+        position: relative;
+        top: 5rem;
+    }
+
+    &__accounts h3{
+        font-size: 2.5rem;
+        position: absolute;
+        top: 30%;
+        left: 10%;
+    }
+
+    // tutaj chcę zrobić losowo wyświetlające się kolory backgroundu z tablicy kolorów
+    // ale póki co czytam i próbuję jak to zrobić
+    &__account{
+        width: 95%;
+        height: 6.5rem;
+        margin: 0 auto;
+        color: var(--color-text);
+        position: relative;
+        top: 5rem;
+        background-color: var(--color-primary-light);
+    }
+
+    &__account h4{
+        font-size: 2.2rem;
+        position: absolute;
+        top: 30%;
+        left: 10%;
+    }
+
+    &__add {
+        width: 95%;
+        height: 6.5rem;
+        margin: 0 auto;
+        position: relative;
+        top: 5rem;
+    }
+
+    &__button {
+        width: 100%;
+        height: 6.5rem;
+        font-size: 5rem;
+        background-color: var(--color-white-opa);
+        border: 0;
+    }
+    
+}
