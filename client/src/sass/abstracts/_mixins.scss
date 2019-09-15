@@ -2,3 +2,18 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+// default dla nagłówka
+@mixin header{
+    width: 100vw;
+    height: 9rem;
+    background-color: var(--color-white-opa);
+    position: relative;
+}
+
+@mixin container {
+    background-color: var(--color-gray-4);
+    width: 90vw;
+    height: 45rem;
+    margin: 0 auto;
+}
