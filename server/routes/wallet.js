@@ -24,7 +24,7 @@ router.post('/', auth, async (req, res) => {
   
   user.wallet.push(account);
   user.globalBalance = user.globalBalance + account.balance;
-
+  
   user = await user.save();
   
   res.send(account);
