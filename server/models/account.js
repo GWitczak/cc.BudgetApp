@@ -21,6 +21,10 @@ const mongoose = require('mongoose');
   cards: {
     type: Array,
     required: true
+  },
+  history: {
+    type: Array,
+    required: true
   }
 });
 

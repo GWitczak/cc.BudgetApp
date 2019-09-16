@@ -23,6 +23,10 @@ const debitSchema = new mongoose.Schema({
     type: Number,
     default: 20000,
     required: true
+  },
+  history: {
+    type: Array,
+    required: true
   }
 });
 
