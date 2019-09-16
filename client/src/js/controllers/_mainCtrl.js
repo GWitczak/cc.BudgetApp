@@ -1,10 +1,12 @@
 import MenuCtrl from '../controllers/menuCtrl';
 import HistoryCtrl from '../controllers/historyCtrl';
+import LoggedCtrl from '../controllers/loggedCtrl';
 
 class MainCtrl {
     constructor() {
         this.menuCtrl = new MenuCtrl();
         this.historyCtrl = new HistoryCtrl();
+        this.loggedCtrl = new LoggedCtrl();
     }
 
     // To tylko teoretyczny przykład, nie zawsze musimy wysyłac callbacka
@@ -29,6 +31,10 @@ class MainCtrl {
                 );
             break;
 
+            case 'account':
+                this.loggedCtrl.init();
+            break;
+
             case '...':
                 // odpowiedniCtrl.init(); + ewentualny callback
             break;
@@ -40,6 +46,7 @@ class MainCtrl {
     init() {
         console.log('Main Ctrl working...');
         this.menuCtrl.init( this.menuClickCallback.bind(this) );
+        this.loggedCtrl.init(this.menuClickCallback.bind(this));
     }
 }
 
