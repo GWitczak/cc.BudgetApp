@@ -28,6 +28,16 @@ class HistoryModel extends BaseModel {
         }
     }
 
+    getFakeHistory() {
+        return [
+            { title: 'Czynsz', date: '23.01.2020', money: 2000, category: 'Opłaty' },
+            { title: 'Czynsz1', date: '23.01.2020', money: 1000, category: 'Opłaty' },
+            { title: 'Czynsz2', date: '23.01.2020', money: 500, category: 'Opłaty' },
+            { title: 'Czynsz3', date: '23.01.2020', money: 700, category: 'Opłaty' },
+            { title: 'Czynsz4', date: '23.01.2020', money: 12000, category: 'Opłaty' },
+        ]
+    }
+
 }
 
 export default HistoryModel;

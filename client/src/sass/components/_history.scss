@@ -1,0 +1,32 @@
+.history {
+    color: var(--color-text);      
+
+    &__item {
+        background-color: var(--color-gray-2);
+
+        &:nth-child(2n) {
+            background-color: var(--color-primary-light);
+        }
+    }
+
+    &__item-upper,
+    &__item-lower {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .5rem 1rem;
+    }
+
+    &__item-title {
+        font-weight: bold;
+        color: var(--color-black);        
+    }
+
+    &__item-date {
+        font-weight: 300;
+    }
+
+    &__item-money {
+        font-weight: bold;
+    }
+}

@@ -1,10 +1,12 @@
 import MenuCtrl from '../controllers/menuCtrl';
 import HistoryCtrl from '../controllers/historyCtrl';
+import LoggedCtrl from '../controllers/loggedCtrl';
 
 class MainCtrl {
     constructor() {
         this.menuCtrl = new MenuCtrl();
         this.historyCtrl = new HistoryCtrl();
+        this.loggedCtrl = new LoggedCtrl();
     }
 
     // To tylko teoretyczny przykład, nie zawsze musimy wysyłac callbacka
@@ -17,16 +19,18 @@ class MainCtrl {
     // po czym wysyła do MainCtrl informacje o tym co zostało kliknięte (params),
     // na podstawie tych informacji możemy z poziomu MainCtrl inicjalizowac odpowiednie kontrolery
     // np. historyCtrl.init() i w init() mamy możliwosc przekazania kolejnych callbacków
-    menuClickCallback(params) {
-        console.log('menuClickCallback runs - params:', params);
-        console.log(this.menuCtrl);
-        // Tutaj na podstawie tego co ktoś wybrał w menu zrobimy np.:
+    menuClickCallback(linkStr) {
 
-        switch(params) {
+        console.log(linkStr)
+        switch(linkStr.toLowerCase()) {
             case 'history':
                 this.historyCtrl.init( 
                     this.moreHistoryClickCallback.bind(this)
                 );
+            break;
+
+            case 'account':
+                this.loggedCtrl.init();
             break;
 
             case '...':
@@ -40,6 +44,7 @@ class MainCtrl {
     init() {
         console.log('Main Ctrl working...');
         this.menuCtrl.init( this.menuClickCallback.bind(this) );
+        this.loggedCtrl.init(this.menuClickCallback.bind(this));
     }
 }
 

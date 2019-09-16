@@ -12,43 +12,41 @@ router.post('/', auth, async (req, res) => {
   if (!user) return res.status(404).send('User with the given id not found.');
 
   const type = req.body.type;
-  let account
+  let element
 
   if (type === 'account') {
-    account = Account.create(req.body, res);
+    element = Account.create(req.body, res);
   } else if (type === 'cash') {
-    account = Cash.create(req.body, res);
+    element = Cash.create(req.body, res);
   } else if (type === 'debitCard') {
-    account = DebitCard.create(req.body, res);
-  } else return res.status(400).send('Wrong type of account.');
+    element = DebitCard.create(req.body, res);
+  } else return res.status(400).send('Wrong type of wallet element.');
   
-  user.wallet.push(account);
-  user.globalBalance = user.globalBalance + account.balance;
-  
+  user.wallet.push(element);
+  user.globalBalance = user.globalBalance + element.balance;
+
   user = await user.save();
   
-  res.send(account);
+  res.send(element);
 });
 
 router.delete('/:id', auth, async (req, res) => {
   let user = await User.findOne({ _id: req.user._id });
-  let collection = user.wallet;
 
-  const idx = collection.findIndex((object) => {
-    return object._id == req.params.id
+  const idx = user.wallet.findIndex((element) => {
+    return element._id == req.params.id
   });
 
   if (idx === -1) return res.status(404).send('The account with the given ID was not found.');
 
-  const account = collection[idx];
-  collection.splice(idx, 1);
+  const element = user.wallet[idx];
 
-  console.log(collection);
-  user.wallet = collection;
+  user.wallet.splice(idx, 1);
+  user.globalBalance = user.globalBalance - element.balance;
+
   user = await user.save();
-
-  res.send(account);
-});
+  res.send(element);
+})
 
 
 module.exports = router; 

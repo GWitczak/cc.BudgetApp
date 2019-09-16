@@ -12,6 +12,10 @@ const cashSchema = new mongoose.Schema({
     default: 0,
     required: true,
     min: function() { return -(this.maxDebit); }
+  },
+  history: {
+    type: Array,
+    required: true
   }
 });
 

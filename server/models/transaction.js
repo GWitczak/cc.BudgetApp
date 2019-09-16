@@ -4,12 +4,12 @@ const Joi = require('@hapi/joi');
 const transactionSchema = new mongoose.Schema({
     date: {
         type: Date,
-        required: true
+        default: Date.now
     },
     accountType: {
         type: String,
+        enum: ['debitCard', 'cash', 'account'],
         required: true,
-        enum: [ 'cash', 'debitCard', 'account']
     },
     cardTransaction: {
         type: Boolean,
@@ -47,50 +47,39 @@ const transactionSchema = new mongoose.Schema({
     }
 });
 
-transactionSchema.static.create = function (req, res) {
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
+
+transactionSchema.statics.create = function createTransaction(req, res) {
+    const { error } = validateTransaction(req);
+    if (error) return res.status(400).send(error.details[0].message);
     const accountType = req.accountType;
+    let transaction = new Transaction({
+        accountType: accountType,
+        title: req.title,
+        amount: req.amount,
+        category: req.category
+    });
 
     if (accountType === 'account') {
-        return new Transaction({
-            date: dateTime,
-            accountType: accountType,
-            type: req.type,
-            title: req.title,
-            amount: req.amount,
-            category: req.category
-        });
+        return transaction;
     } else if (accountType === 'cash') {
-        return new Transaction({
-            date: dateTime,
-            accountType: accountType,
-            type: req.type,
-            title: req.title,
-            amount: req.amount,
-            category: req.category
-        });
+        return transaction;
     } else {
-        return new Transaction({
-            date: dateTime,
-            accountType: accountType,
-            type: req.type,
-            cardTransaction: true,
-            cardOwner: req.cardOwner,
-            title: req.title,
-            amount: req.amount,
-            category: req.category
-        });
+        transaction.cardOwner = req.cardOwner;
+        transaction.cardTransaction = true;
+        return transaction;
     }
 }
 
-const Transaction = mongoose.model('History', transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 function validateTransaction(transaction) {
     return Joi.validate(transaction, {
-        
+        accountType: ['debitCard', 'cash', 'account'],
+        amount: Joi.number().min(0).required(),
+        type: ['exp', 'inc'],
+        title: Joi.string().required(),
+        category: ['bills', 'food', 'transport', 'home', 'salary', 'allowance']
+
     })
 }
 

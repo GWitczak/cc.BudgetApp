@@ -19,7 +19,7 @@ module.exports = function(app) {
   app.use('/api/users', userRouter);
   app.use('/api/login', loginRouter);
   app.use('/api/wallet', walletRouter);
-  app.use('api/transactions', transactionRouter);
+  app.use('/api/transactions', transactionRouter);
 
   app.use('/api/tests', testRouter);
 
