@@ -17,12 +17,10 @@ class MainCtrl {
     // po czym wysyła do MainCtrl informacje o tym co zostało kliknięte (params),
     // na podstawie tych informacji możemy z poziomu MainCtrl inicjalizowac odpowiednie kontrolery
     // np. historyCtrl.init() i w init() mamy możliwosc przekazania kolejnych callbacków
-    menuClickCallback(params) {
-        console.log('menuClickCallback runs - params:', params);
-        console.log(this.menuCtrl);
-        // Tutaj na podstawie tego co ktoś wybrał w menu zrobimy np.:
+    menuClickCallback(linkStr) {
 
-        switch(params) {
+        console.log(linkStr)
+        switch(linkStr.toLowerCase()) {
             case 'history':
                 this.historyCtrl.init( 
                     this.moreHistoryClickCallback.bind(this)

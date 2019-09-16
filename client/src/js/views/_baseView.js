@@ -26,14 +26,6 @@ class BaseView {
         DOMElement.insertAdjacentHTML('afterbegin', markup);
     }
 
-    getElementByElStr(elStr) {
-        return document.querySelector(elStr);
-    }
-
-    getElementsByElStr(elStr) {
-        return document.querySelectorAll(elStr);
-    }
-
     _clearElementContent(element) {
         let el;
         if (typeof element === 'string') {

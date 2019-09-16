@@ -8,14 +8,15 @@ class MenuCtrl {
         this.model = new MenuModel();
     }
 
-    _clickHandler(event, mainCtrlCallback) {
-        // Jakaś wewnętrzna logika MenuCtrl - jeżeli potrzebna
-        // ... 
-        // ...
+    _clickHandler(ev, mainCtrlCallback) {
+        ev.preventDefault();
 
+        // Wewnętrzna logika
+        const link = ev.target.closest(`.${this.view.elStr.menuLink}`);
+        if (!link) return;
 
         // Przekazujemy dane na zewnątrz do MainCtrl o tym co zostało kliknięte
-        mainCtrlCallback(event.target);
+        mainCtrlCallback(link.pathname.slice(1));
     }
 
     _setListeners(menuClickCallback) {
