@@ -28,10 +28,8 @@ router.post('/', auth, async (req, res) => {
         else user.globalBalance = user.globalBalance + transaction.amount;
 
         user.history.push(transaction);
-        user.wallet[index].history.push(transaction);
-        console.log(user.wallet[index]);
+        wallet.history.push(transaction);
         user = await user.save();
-        console.log(user);
         res.send(transaction);
     } catch (err) {
         res.status(500).send(err.message);
@@ -40,8 +38,24 @@ router.post('/', auth, async (req, res) => {
 
 
 router.get('/', auth, async (req, res) => {
-    const transactions = await Transaction.find();
+    let user = await User.findOne({ _id: req.user._id });
+    if (!user) return res.status(404).send("Couldn't find user with that id.");
+
+    const transactions = await user.history;
     res.send(transactions);
 })
+
+router.get('/:id'), auth, async (req, res) => {
+    let user = await User.findOne({ _id: req.user._id });
+    if (!user) return res.status(404).send("Couldn't find user with that id.");
+
+    const idx = user.wallet.findIndex((element) => {
+        return element._id == req.params.id
+    });
+    if (index === -1) return res.status(404).send("Couldn't find wallet with that id.");
+
+    const transactions = await wallet[idx].history;
+    res.send(transactions);
+}
 
 module.exports = router;
