@@ -30,6 +30,12 @@ cashSchema.statics.create = function (cash, res) {
   });
 }
 
+cashSchema.statics.consolidate = function (balance, cashObj, res) {
+  cashObj.balance += balance;
+  if (cashObj.balance < 0) return res.status(400).send("Your cash balance can't be lower than 0!");
+  return cashObj
+}
+
 const Cash = mongoose.model('Cash', cashSchema);
 
 function validateCash(cash) {
