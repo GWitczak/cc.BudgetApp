@@ -44,29 +44,32 @@ const transactionSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['bills', 'food', 'transport', 'home']
+    },
+    wallet_id: {
+        type: String,
+        required: true
     }
 });
 
+
 transactionSchema.statics.create = function createTransaction(req, res) {
-    const { error } = validateTransaction(req);
+    const { error } = validateTransaction(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    const accountType = req.accountType;
+    const accountType = req.body.accountType;
     let transaction = new Transaction({
         accountType: accountType,
-        title: req.title,
-        amount: req.amount,
-        category: req.category
+        title: req.body.title,
+        amount: req.body.amount,
+        category: req.body.category
     });
 
-    if (accountType === 'account') {
-        return transaction;
-    } else if (accountType === 'cash') {
-        return transaction;
-    } else {
-        transaction.cardOwner = req.cardOwner;
+    if (accountType === 'debitCard') {
+        transaction.cardOwner = req.body.cardOwner;
         transaction.cardTransaction = true;
         return transaction;
-    }
+    } else  {
+        return transaction;
+    } 
 }
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
@@ -77,7 +80,9 @@ function validateTransaction(transaction) {
         amount: Joi.number().min(0).required(),
         type: ['exp', 'inc'],
         title: Joi.string().required(),
-        category: ['bills', 'food', 'transport', 'home', 'salary', 'allowance']
+        category: ['bills', 'food', 'transport', 'home', 'salary', 'allowance'],
+        wallet_id: Joi.string().required()
+
     })
 }
 
