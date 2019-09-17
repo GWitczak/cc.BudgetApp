@@ -25,7 +25,10 @@ router.post('/', auth, async (req, res) => {
                 wallet.balance = wallet.balance - transaction.amount;
             } else return res.status(404).send("You don't have enough money to complete payment.");
         }
-        else user.globalBalance = user.globalBalance + transaction.amount;
+        else {
+            user.globalBalance = user.globalBalance + transaction.amount;
+            wallet.balance = wallet.balance + transaction.amount;
+        }
 
         user.history.push(transaction);
         wallet.history.push(transaction);

@@ -2,11 +2,11 @@ var swaggerDefinition = {
     info: {
         title: 'My budegt api',
         version: '1.0.0',
-        description: 'Endpoints to test the user registration routes',
+        description: 'Endpoints to test the user registration routes. Pamiętajcie aby przekazywać x-auth-token token w headerze do wszystich zapytań oprócz tych dla usera.',
     },
     host: 'localhost:8000',
     basePath: '/',
-    "tags": ["Users", "Transactions", "wallet"],
+    "tags": ["Users", "Transactions", "wallet", "Login"],
     "paths": {
         "/api/users": {
             "get": {
@@ -61,6 +61,38 @@ var swaggerDefinition = {
             "post": {
                 "tags": ["Users"],
                 "summary": "Creates a new user.",
+                "parameters": [{
+
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "example": "paw@op.pl"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "qwe123"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "paw"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        },
+        "/api/login": {
+            "post": {
+                "tags": ["Login"],
+                "summary": "Login user.",
                 "parameters": [{
 
                 }],
