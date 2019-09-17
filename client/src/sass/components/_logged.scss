@@ -49,11 +49,18 @@
         background-color: var(--color-primary-light);
     }
 
-    &__account h4{
+    &__account p{
         font-size: 2.2rem;
         position: absolute;
         top: 30%;
         left: 10%;
+    }
+
+    &__account :last-child{
+        font-size: 2.2rem;
+        position: absolute;
+        top: 30%;
+        left: 60%;
     }
 
     &__add {
