@@ -23,6 +23,11 @@
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.0",
+    "swagger-client": "^3.9.4",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui": "^3.23.10",
+    "swagger-ui-dist": "^3.23.10",
+    "swagger-ui-express": "^4.1.0",
     "winston-mongodb": "^5.0.0"
   },
   "devDependencies": {
