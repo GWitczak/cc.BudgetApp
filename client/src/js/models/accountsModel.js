@@ -2,11 +2,11 @@ import BaseModel from './_baseModel';
 
 // nadanie endpointa
 
-class LoggedModel extends BaseModel {
+class AccountsModel extends BaseModel {
 
     constructor() {
         super();
-        this.endpoint = 'logged';
+        this.endpoint = 'accounts';
     }
 
     async getAccounts() {
@@ -19,20 +19,28 @@ class LoggedModel extends BaseModel {
         // pobranie danych z API
         try { // nie do końca rozumiem czym dokładnie jest x-auth-token
             const rawData = await fetch(this.url, {
-                '???': { ...this.getAuthTokenHeaderObj() }
+                'headers': { ...this.getAuthTokenHeaderObj() }
             });
 
-            this.logged = await rawData.json();
+            this.accounts = await rawData.json();
 
             // zwrócenie pobranych danych
-            return this.logged;
+            return this.accounts;
 
         } catch (error) {
             console.log(error);
         }
     }
+
+    getFakeAccounts(){
+        return [
+            {name: 'mBank', balance: '1345,34'},
+            {name: 'mBank', balance: '1345,34'},
+            {name: 'mBank', balance: '1345,34'}
+        ]
+    }
 };
 
 
 
-export default LoggedModel;
+export default AccountsModel;
