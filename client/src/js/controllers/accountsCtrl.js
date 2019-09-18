@@ -41,15 +41,20 @@ class AccountsCtrl {
         logged__button_add.addEventListener('click', this._addAccountAndRender)
     }
 
-    async _addAccountAndRender() {
+    async _addAccountAndRender(e) {
         let input_type = document.querySelector('.logged__add_input_type');
         let input_name = document.querySelector('.logged__add_input_name');
         let input_balance = document.querySelector('.logged__add_input_balance');
 
         let res = await this.model.createAccount(input_type.value, input_name.value, input_balance.value);
-        
 
-        this.init();
+        if(res.error) {
+            let error = document.createElement('div');
+            error.innerText = res.error;
+            input_balance.parentNode.appendChild(error);
+        }else {
+            this.init();
+        }
     }
 
     init(menuClickCallback) {
