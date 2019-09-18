@@ -20,6 +20,10 @@ class MainCtrl {
 
     createAccount(result) {
         console.log('createAccount from mainCtrl', result);
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this)
+        );
     }
 
     // Tutaj callback jest przydatny -> MenuCtrl ustawia listenera na elementach menu,

@@ -30,8 +30,6 @@ class AccountsCtrl {
 
         const result = await this.model.createAccount(inputType.value, inputName.value, inputBalance.value);
 
-        this.init();
-
         cb(result);
     }
 
