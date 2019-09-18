@@ -48,6 +48,9 @@ class AccountsCtrl {
 
         let res = await this.model.createAccount(input_type.value, input_name.value, input_balance.value);
 
+        if(res.error)
+            // Do something
+
         this.init();
     }
 
