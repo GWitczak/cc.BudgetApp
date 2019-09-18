@@ -27,7 +27,7 @@ class AccountsCtrl {
     }
 
     init(menuClickCallback) {
-        console.log('Accounts Ctrl working...')
+        console.log('Accounts Ctrl working...');
 
         this.view.renderLoader(this.view.el.content);
 
@@ -40,7 +40,7 @@ class AccountsCtrl {
 
         this._setListeners(menuClickCallback);
     }
-};
+}
 
 
 
