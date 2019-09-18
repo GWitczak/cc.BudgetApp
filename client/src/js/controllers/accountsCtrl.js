@@ -41,7 +41,7 @@ class AccountsCtrl {
         logged__button_add.addEventListener('click', this._addAccountAndRender)
     }
 
-    async _addAccountAndRender(e) {
+    async _addAccountAndRender() {
         let input_type = document.querySelector('.logged__add_input_type');
         let input_name = document.querySelector('.logged__add_input_name');
         let input_balance = document.querySelector('.logged__add_input_balance');
@@ -51,7 +51,8 @@ class AccountsCtrl {
         if(res.error) {
             let error = document.createElement('div');
             error.innerText = res.error;
-            input_balance.parentNode.appendChild(error);
+            error.style.color = 'red';
+            input_balance.parentNode.insertBefore(error ,input_balance.parentNode.children[3]);
         }else {
             this.init();
         }
