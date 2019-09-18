@@ -1,82 +1,64 @@
 .logged {
-    height: 100%;
-    background-image: url(../../assets/logged.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    
 
-    
+
     &__header{
         @include header;
-};
-    &__header h2{
-        font-size: 2.5rem;
-        position: absolute;
-        top: 30%;
-        left: 10%;
-    };
+    }
 
     &__container {
         @include container;
+        @include centerBlock;
     }
 
     &__accounts {
-        width: 95%;
-        height: 10rem;
+        text-align: center;
+        font-size: 2.5rem;
         background-color: var(--color-gray-5);
         color: var(--color-white);
-        margin: 0 auto;
-        position: relative;
-        top: 5rem;
-    }
-
-    &__accounts h3{
-        font-size: 2.5rem;
-        position: absolute;
-        top: 30%;
-        left: 10%;
+        margin-bottom: 5rem;
+        padding: 2rem;
+        @include centerBlock;
     }
 
     // tutaj chcę zrobić losowo wyświetlające się kolory backgroundu z tablicy kolorów
     // ale póki co czytam i próbuję jak to zrobić
-    &__account{
-        width: 95%;
+    &__account {
+        font-size: 2.2rem;
         height: 6.5rem;
-        margin: 0 auto;
         color: var(--color-text);
-        position: relative;
-        top: 5rem;
         background-color: var(--color-primary-light);
+        padding: 0 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--color-gray-1);
+        transition: background-color .3s;
+        
+        &:hover {
+            background-color: var(--color-white);
+            cursor: pointer;
+        }
     }
 
-    &__account p{
+
+    &__account > :last-child {
         font-size: 2.2rem;
-        position: absolute;
-        top: 30%;
-        left: 10%;
-    }
-
-    &__account :last-child{
-        font-size: 2.2rem;
-        position: absolute;
-        top: 30%;
-        left: 60%;
-    }
-
-    &__add {
-        width: 95%;
-        height: 6.5rem;
-        margin: 0 auto;
-        position: relative;
-        top: 5rem;
     }
 
     &__button {
+        margin-top: 5rem;
+        display: block;
         width: 100%;
-        height: 6.5rem;
         font-size: 5rem;
         background-color: var(--color-white-opa);
-        border: 0;
+        border: none;
+        transition: background-color .3s;
+
+        &:hover,
+        &:active {
+            background-color: var(--color-white);
+            cursor: pointer;        
+        }
     }
     
 }
