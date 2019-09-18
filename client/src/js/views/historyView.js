@@ -17,7 +17,9 @@ class HistoryView extends BaseView {
 
         let markup = `        
             <section class="history">
-                <h2 class="heading-primary text-center">Historia operacji</h2>
+                <div class="history__header">
+                    <h2>Historia operacji</h2>
+                </div>
                 <ul class="history__list">
                     ${ recordsMarkup }
                 </ul>

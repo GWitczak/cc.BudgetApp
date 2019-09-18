@@ -34,9 +34,11 @@ class AccountsModel extends BaseModel {
 
     getFakeAccounts(){
         return [
-            {name: 'mBank', balance: '1345,34'},
-            {name: 'mBank', balance: '1345,34'},
-            {name: 'mBank', balance: '1345,34'}
+            {name: 'mBank', balance: '1345,34', id: 1},
+            {name: 'mBank', balance: '1345,34', id: 2},
+            {name: 'mBank', balance: '1345,34', id: 3},
+            {name: 'mBank', balance: '1345,34', id: 4},
+            {name: 'mBank', balance: '1345,34', id: 5},
         ]
     }
 };

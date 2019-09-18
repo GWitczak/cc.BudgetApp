@@ -14,20 +14,33 @@ class AccountsCtrl {
         this.model = new AccountsModel();
     }
 
-    _clickHandler(ev, ) {
+    _clickHandler(ev, cb) {
+        const accountEl = ev.target.closest(this.view.elStr.singleAccount);
+        const accountID = (accountEl) ? accountEl.dataset.id : null;
+        
+        if (!accountID) return;
 
+        cb(accountID);
     }
 
-    _setListeners(menuClickCallback) {
-        // const accountsEl = this.view.getElementsByElStr(this.view.elStr.accounts);
-
-        // accountsEl.addEventListener('click', (ev) => {
-        //     this._clickHandler(ev, clickHandler)
-        // });
+    _addAccountHandler(ev, cb) {
+        cb();
     }
 
-    init(menuClickCallback) {
-        console.log('Accounts Ctrl working...')
+    _setListeners(accountClickCallback, addAccountCallback) {
+        const loggedContainer = this.view.getElementByElStr(this.view.elStr.loggedContainer);
+        const addAccBtn = this.view.getElementByElStr(this.view.elStr.addAccountBtn);
+
+        loggedContainer.addEventListener('click', (ev) => {
+            this._clickHandler(ev, accountClickCallback)
+        });
+
+        addAccBtn.addEventListener('click', (ev) => {
+            this._addAccountHandler(ev, addAccountCallback)
+        });
+    }
+
+    init(accountClickCallback, addAccountCallback) {
 
         this.view.renderLoader(this.view.el.content);
 
@@ -38,7 +51,10 @@ class AccountsCtrl {
             this.view.createAccountMarkup(accounts)
         );
 
-        this._setListeners(menuClickCallback);
+        this._setListeners(
+            accountClickCallback,
+            addAccountCallback
+        );
     }
 };
 
