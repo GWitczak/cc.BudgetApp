@@ -9,6 +9,10 @@ class AccountsView extends BaseView {
           loggedContainer: '.logged__container',
           singleAccount: '.logged__account',
           addAccountBtn: '.logged__button',
+          createAccountBtn: '.logged__button_add',
+          inputType: '.logged__add_input_type',
+          inputName: '.logged__add_input_name',
+          inputBalance: '.logged__add_input_balance'
         }
     }
 
@@ -92,8 +96,8 @@ class AccountsView extends BaseView {
     // };
 
     init () {
-            
+
     }
 }
 
-export default AccountsView; 
+export default AccountsView;
