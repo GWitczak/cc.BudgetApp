@@ -4,7 +4,7 @@ const express = require('express');
 const testRouter = require('../routes/tests');
 const userRouter = require('../routes/users');
 const loginRouter = require('../routes/login');
-const walletRouter = require('../routes/wallet')
+const walletRouter = require('../routes/wallet');
 const transactionRouter = require('../routes/transactions');
 
 const error = require('../middleware/error');
@@ -26,4 +26,4 @@ module.exports = function(app) {
 
   // Errors handler
   app.use(error);
-}
+};

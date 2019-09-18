@@ -17,14 +17,34 @@ class AccountsCtrl {
     _clickHandler(ev, cb) {
         const accountEl = ev.target.closest(this.view.elStr.singleAccount);
         const accountID = (accountEl) ? accountEl.dataset.id : null;
-        
+
         if (!accountID) return;
 
         cb(accountID);
     }
 
+    async _createAccountHandler(ev, cb) {
+        const inputType = this.view.getElementByElStr(this.view.elStr.inputType);
+        const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
+        const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
+
+        const result = await this.model.createAccount(inputType.value, inputName.value, inputBalance.value);
+
+        cb(result);
+    }
+
     _addAccountHandler(ev, cb) {
-        cb();
+
+        this.view.render(
+            this.view.el.content,
+            this.view.createAccountAdd()
+        );
+
+        const createAccBtn = this.view.getElementByElStr(this.view.elStr.createAccountBtn);
+
+        createAccBtn.addEventListener('click', async (ev) => {
+            await this._createAccountHandler(ev, cb);
+        });
     }
 
     _setListeners(accountClickCallback, addAccountCallback) {
@@ -56,7 +76,7 @@ class AccountsCtrl {
             addAccountCallback
         );
     }
-};
+}
 
 
 

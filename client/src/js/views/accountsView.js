@@ -9,8 +9,12 @@ class AccountsView extends BaseView {
           loggedContainer: '.logged__container',
           singleAccount: '.logged__account',
           addAccountBtn: '.logged__button',
+          createAccountBtn: '.logged__button_add',
+          inputType: '.logged__add_input_type',
+          inputName: '.logged__add_input_name',
+          inputBalance: '.logged__add_input_balance'
         }
-}
+    }
 
   createAccountMarkup(account) {
     let recordsMarkup = ``;
@@ -31,11 +35,30 @@ class AccountsView extends BaseView {
           </div>
         </div>
       </div>
-    `
+    `;
     return markup;
 
   }
 
+  createAccountAdd() {
+
+      let add = `
+      <div class="logged">
+        <div class="logged__header">
+          <h2>Dodaj konto</h2>
+        </div>
+        <div class="logged__container">
+          <input class="logged__add_input_type" type='text' placeholder='Nazwa'/>
+          <input class="logged__add_input_name" type='text' placeholder='Wybierz rodzaj'/>
+          <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
+          <div class="logged__add">
+            <button class="logged__button_add">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+      return add;
+  }
 
   displaySingleAccount (accountRecord) {
     return `
@@ -73,8 +96,8 @@ class AccountsView extends BaseView {
     // };
 
     init () {
-            
-    }
-};
 
-export default AccountsView; 
+    }
+}
+
+export default AccountsView;

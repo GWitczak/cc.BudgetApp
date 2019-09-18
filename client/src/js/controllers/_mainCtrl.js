@@ -18,8 +18,12 @@ class MainCtrl {
         console.log('loadAccountDetails, params: ', accountId);
     }
 
-    createAccount() {
-        console.log('createAccount from mainCtrl');
+    createAccount(result) {
+        console.log('createAccount from mainCtrl', result);
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this)
+        );
     }
 
     // Tutaj callback jest przydatny -> MenuCtrl ustawia listenera na elementach menu,
@@ -31,7 +35,7 @@ class MainCtrl {
         console.log(linkStr)
         switch(linkStr.toLowerCase()) {
             case 'history':
-                this.historyCtrl.init( 
+                this.historyCtrl.init(
                     this.moreHistoryClick.bind(this)
                 );
             break;
@@ -46,7 +50,7 @@ class MainCtrl {
             case '...':
                 // odpowiedniCtrl.init(ewentualny callback);
             break;
-    
+
         }
 
     }
