@@ -10,10 +10,17 @@ class MainCtrl {
     }
 
     // To tylko teoretyczny przykład, nie zawsze musimy wysyłac callbacka
-    moreHistoryClickCallback(params) {
+    moreHistoryClick(params) {
         console.log('moreHistoryClickHandler runs - params:', params);
     }
 
+    loadAccountDetails(accountId) {
+        console.log('loadAccountDetails, params: ', accountId);
+    }
+
+    createAccount() {
+        console.log('createAccount from mainCtrl');
+    }
 
     // Tutaj callback jest przydatny -> MenuCtrl ustawia listenera na elementach menu,
     // po czym wysyła do MainCtrl informacje o tym co zostało kliknięte (params),
@@ -25,16 +32,19 @@ class MainCtrl {
         switch(linkStr.toLowerCase()) {
             case 'history':
                 this.historyCtrl.init( 
-                    this.moreHistoryClickCallback.bind(this)
+                    this.moreHistoryClick.bind(this)
                 );
             break;
 
             case 'accounts':
-                this.accountsCtrl.init();
+                this.accountsCtrl.init(
+                    this.loadAccountDetails.bind(this),
+                    this.createAccount.bind(this)
+                );
             break;
 
             case '...':
-                // odpowiedniCtrl.init(); + ewentualny callback
+                // odpowiedniCtrl.init(ewentualny callback);
             break;
     
         }
@@ -43,8 +53,13 @@ class MainCtrl {
 
     init() {
         console.log('Main Ctrl working...');
-        this.menuCtrl.init( this.menuClickCallback.bind(this) );
-        this.accountsCtrl.init(this.menuClickCallback.bind(this));
+        this.menuCtrl.init(
+            this.menuClickCallback.bind(this)
+        );
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this)
+        );
     }
 }
 

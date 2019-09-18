@@ -3,12 +3,16 @@ import BaseView from './_baseView';
 class AccountsView extends BaseView {
     constructor() {
         super();
+
         this.elStr = {
-          account: '.account'
+          account: '.account',
+          loggedContainer: '.logged__container',
+          singleAccount: '.logged__account',
+          addAccountBtn: '.logged__button',
         }
     }
 
-  createAccountMarkup(account){
+  createAccountMarkup(account) {
     let recordsMarkup = ``;
     account.forEach(record => recordsMarkup += this.displaySingleAccount(record));
 
@@ -52,9 +56,9 @@ class AccountsView extends BaseView {
       return add;
   }
 
-  displaySingleAccount (accountRecord){
+  displaySingleAccount (accountRecord) {
     return `
-      <div class="logged__account">
+      <div class="logged__account" data-id="${accountRecord.id}">
         <p>${accountRecord.name}</p>
         <p>${accountRecord.balance}</p>
       </div>

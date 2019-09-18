@@ -1,6 +1,15 @@
 .history {
     color: var(--color-text);      
 
+    &__header {
+        @include header;
+    }
+
+    &__list {
+        @include container;
+        @include centerBlock;
+    }
+    
     &__item {
         background-color: var(--color-gray-2);
 
@@ -17,16 +26,15 @@
         padding: .5rem 1rem;
     }
 
-    &__item-title {
-        font-weight: bold;
-        color: var(--color-black);        
-    }
-
-    &__item-date {
-        font-weight: 300;
-    }
-
+    &__item-title,
     &__item-money {
+        font-size: 2.5rem;
         font-weight: bold;
+    }
+
+    &__item-date,
+    &__item-category {
+        font-size: 1.6rem;
+        font-weight: 300;
     }
 }
