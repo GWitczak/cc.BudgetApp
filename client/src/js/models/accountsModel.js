@@ -24,10 +24,10 @@ class AccountsModel extends BaseModel {
                 body: JSON.stringify({type: type, name: name, balance: balance})}
             });
 
-            this.accounts = await rawData.json();
+            this.account = await rawData.json();
 
             // zwrócenie pobranych danych
-            return this.accounts;
+            return this.account;
 
         } catch (error) {
             console.log(error);

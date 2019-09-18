@@ -44,7 +44,7 @@ class AccountsView extends BaseView {
           <input class="logged__add_input_name" type='text' placeholder='Wybierz rodzaj'/>
           <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
           <div class="logged__add">
-            <button class="logged__button">+</button>
+            <button class="logged__button_add">+</button>
           </div>
         </div>
       </div>
