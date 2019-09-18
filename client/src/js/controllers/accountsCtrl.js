@@ -47,9 +47,7 @@ class AccountsCtrl {
         let input_balance = document.querySelector('.logged__add_input_balance');
 
         let res = await this.model.createAccount(input_type.value, input_name.value, input_balance.value);
-
-        if(res.error)
-            // Do something
+        
 
         this.init();
     }
