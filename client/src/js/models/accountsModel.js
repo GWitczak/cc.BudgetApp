@@ -69,7 +69,7 @@ class AccountsModel extends BaseModel {
             const token = response.headers.get('x-auth-token');
             const data = await response.json();
 
-            console.log(data);
+            console.log('Zalogowany jako:', data);
             
             this.saveAuthToken(token);
             this.save('user', data);
@@ -83,16 +83,15 @@ class AccountsModel extends BaseModel {
         this.url = `${this.baseApiUrl}${this.endpoint}`;
 
         try {
-            const response = await fetch(`${this.url}`);
-            this.users = await response.json();
+            const response = await fetch(`${this.url}`, {
+                headers: {...this.getAuthTokenHeaderObj()}
+            });
+            this.user = await response.json();
         } catch (error) {
             console.log(error);
         }
 
-        const localUser = this.load('user');
-
-        this.user = this.users.filter(user => user._id === localUser._id)
-        const account = this.user[0].wallet.filter(acc => acc._id === accId);
+        const account = this.user.wallet.filter(acc => acc._id === accId);
         return account[0];
     }
     
