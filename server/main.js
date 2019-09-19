@@ -15,11 +15,13 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Expose-Headers', 'x-auth-token');
     next();
-});
+ });
 
 app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
