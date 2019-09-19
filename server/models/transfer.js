@@ -25,7 +25,7 @@ const transferSchema = new mongoose.Schema({
     }
 });
 
-// data, id konta z którego chcemy zrobić przelew, id konta na które chcemy zrobić przelew, amount, title
+
 transferSchema.statics.create = function createTransfer(req, res) {
     const { error } = validateTransfer(req.body);
     if (error) return res.status(400).send(error.details[0].message);

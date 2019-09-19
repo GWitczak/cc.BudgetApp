@@ -48,12 +48,4 @@ router.post('/', auth, async (req, res) => {
         
 });
 
-//POST, z którego id 1 zmienna, na jakie id 2 zmienna, id znaleźć jak w wallet.js 34 linijka
-//potem odjąc z jednego konta, dodać na drugie
-//pushnąc do history, tak jak transactions.js
-
-
-
-//testowanie zrobić usera, zalogować się, sprawdzić przez nagłówek (header), który się wyświetli w response
-
 module.exports = router;
