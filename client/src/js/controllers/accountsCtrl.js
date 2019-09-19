@@ -14,21 +14,23 @@ class AccountsCtrl {
         this.model = new AccountsModel();
     }
 
-    _clickHandler(ev, cb) {
+    async _clickHandler(ev, cb) {
         const accountEl = ev.target.closest(this.view.elStr.singleAccount);
         const accountID = (accountEl) ? accountEl.dataset.id : null;
 
         if (!accountID) return;
 
-        cb(accountID);
+        const account = await this.model.getAccountDetails(accountID);
+        
+        this.view.showDetails(account);
     }
 
     async _createAccountHandler(ev, cb) {
-        const inputType = this.view.getElementByElStr(this.view.elStr.inputType);
+        const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
         const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
         const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
 
-        const result = await this.model.createAccount(inputType.value, inputName.value, inputBalance.value);
+        const result = await this.model.createAccount(selectType.options[selectType.selectedIndex].value, inputName.value, inputBalance.value);
 
         cb(result);
     }
@@ -60,7 +62,11 @@ class AccountsCtrl {
         });
     }
 
-    init(accountClickCallback, addAccountCallback) {
+    async init(accountClickCallback, addAccountCallback) {
+        
+        //Testing
+        await this.model.login();
+        // END
 
         this.view.renderLoader(this.view.el.content);
 

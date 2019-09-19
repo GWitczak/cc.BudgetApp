@@ -16,7 +16,7 @@ class HistoryModel extends BaseModel {
 
         try {
             const rawData = await fetch(this.url, {
-                'headers': { ...this.getAuthTokenHeaderObj() }
+                headers: { ...this.getAuthTokenHeaderObj() }
             });
 
             this.history = await rawData.json();
