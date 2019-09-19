@@ -2,22 +2,18 @@ const express = require('express');
 const { User, validateUser } = require('../models/user');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const auth = require('../middleware/auth');
 
 
-// ----------------- INFO --------------------
-// FOR TESTING ONLY - DELETE IT AFTER DEV
-
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
-        const users = await User.find();
-        res.send(users);
+        console.log(req.user)
+        const user = await User.findById(req.user._id);
+        res.send(user);
     } catch(ex) {
         res.status(500).send(ex.message);
     }
 })
-
-// ----------------- INFO --------------------
-
 
 router.post('/', async (req, res) => {
 
