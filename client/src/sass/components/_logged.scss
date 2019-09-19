@@ -38,7 +38,7 @@
         align-items: center;
         border-bottom: 1px solid var(--color-gray-1);
         transition: background-color .3s;
-        
+
         &:hover {
             background-color: var(--color-white);
             cursor: pointer;
@@ -62,8 +62,57 @@
         &:hover,
         &:active {
             background-color: var(--color-white);
-            cursor: pointer;        
+            cursor: pointer;
         }
     }
-    
+
+    &__container_add {
+        @include container;
+        @include centerBlock;
+        max-width: 500px;
+    }
+
+    &__button_add {
+        margin-top: 5rem;
+        display: block;
+        width: 100%;
+        font-size: 5rem;
+        background-color: var(--color-primary-light);
+        border: none;
+        transition: background-color .3s;
+
+        &:hover,
+        &:active {
+            background-color: var(--color-white);
+            cursor: pointer;
+        }
+    }
+
+    &__add_input_name {
+        font-size: 1.8rem;
+        width: 100%;
+        border: none;
+        margin: 20px 0;
+        padding: 14px 18px;
+        border-radius: 3px;
+    }
+
+    &__add_select_type {
+        font-size: 1.8rem;
+        width: 100%;
+        border: none;
+        margin: 20px 0;
+        padding: 14px 18px;
+        border-radius: 3px;
+    }
+
+    &__add_input_balance {
+        font-size: 1.8rem;
+        width: 100%;
+        border: none;
+        margin: 20px 0;
+        padding: 14px 18px;
+        border-radius: 3px;
+    }
+
 }

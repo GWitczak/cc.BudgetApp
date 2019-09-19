@@ -26,11 +26,11 @@ class AccountsCtrl {
     }
 
     async _createAccountHandler(ev, cb) {
-        const inputType = this.view.getElementByElStr(this.view.elStr.inputType);
+        const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
         const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
         const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
 
-        const result = await this.model.createAccount(inputType.value, inputName.value, inputBalance.value);
+        const result = await this.model.createAccount(selectType.options[selectType.selectedIndex].value, inputName.value, inputBalance.value);
 
         cb(result);
     }
