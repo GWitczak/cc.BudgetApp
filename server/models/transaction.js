@@ -60,7 +60,8 @@ transactionSchema.statics.create = function createTransaction(req, res) {
         accountType: accountType,
         title: req.body.title,
         amount: req.body.amount,
-        category: req.body.category
+        category: req.body.category,
+        wallet_id: req.body.wallet_id
     });
 
     if (accountType === 'debitCard') {
