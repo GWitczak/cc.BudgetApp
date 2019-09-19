@@ -1,0 +1,48 @@
+.header {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+
+    &__container {
+        display: flex;
+        align-items: center;
+        height: 8rem;
+        width: 90%;
+        @include centerBlock;
+    }
+    
+    &__logo {
+        margin-right: auto;
+        font-size: 3rem;
+    }
+}
+
+.menu {
+
+    &__nav {
+        font-size: 0;
+    }
+
+    &__nav-item {
+        display: inline-block;
+
+        &:not(:last-child) {
+            border-right: 1px solid var(--color-white-opa);
+        }
+    }
+
+    &__nav-link {
+        font-size: 2rem;
+        display: block;
+        padding: 0 3rem;
+        color: var(--color-white);
+        text-decoration: none;
+        transition: color .3s;
+
+        &:hover,
+        &:active {
+            color: var(--color-gray-4);
+        }
+
+    }
+
+}
