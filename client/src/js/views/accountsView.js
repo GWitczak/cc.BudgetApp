@@ -12,7 +12,8 @@ class AccountsView extends BaseView {
           createAccountBtn: '.logged__button_add',
           inputType: '.logged__add_input_type',
           inputName: '.logged__add_input_name',
-          inputBalance: '.logged__add_input_balance'
+          inputBalance: '.logged__add_input_balance',
+          loggedDetails: '.logged__details'
         }
     }
 
@@ -30,6 +31,7 @@ class AccountsView extends BaseView {
            <h3>Twoje konta</h3>
           </div>
           ${ recordsMarkup }
+          <div class="logged__details"></div>
           <div class="logged__add">
             <button class="logged__button">+</button>
           </div>
@@ -38,6 +40,21 @@ class AccountsView extends BaseView {
     `;
     return markup;
 
+  }
+
+  showDetails(account) {
+      const markup = `
+        <div class="logged__accounts-details">
+            <h3>Szczegóły konta</h3>
+        </div>
+        <p>ID konta: ${account._id}</p>
+        <p>Kasa: ${account.balance}</p>
+        <p>Typ: ${account.type}</p>
+        <p>Historia: ${JSON.stringify(account.history)}</p>
+      `;
+
+      const el = this.getElementByElStr(this.elStr.loggedDetails);
+      this.render(el, markup);
   }
 
   createAccountAdd() {

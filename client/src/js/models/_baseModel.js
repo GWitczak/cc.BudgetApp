@@ -1,7 +1,7 @@
 class BaseModel {
 
     constructor() {
-        this.baseApiUrl = 'localhost:3000/api/';
+        this.baseApiUrl = 'http://localhost:8000/api/';
     }
 
     getAuthTokenHeaderObj() {
@@ -10,6 +10,14 @@ class BaseModel {
 
     saveAuthToken(token) {
         localStorage.setItem('budgetAppToken', token);
+    }
+
+    save(where, what) {
+        localStorage.setItem(where, JSON.stringify(what));
+    }
+
+    load(what) {
+        return JSON.parse(localStorage.getItem(what));
     }
 
     getAuthToken() {
