@@ -12,7 +12,7 @@ class MenuCtrl {
         ev.preventDefault();
 
         // Wewnętrzna logika
-        const link = ev.target.closest(`.${this.view.elStr.menuLink}`);
+        const link = ev.target.closest(`${this.view.elStr.menuLink}`);
         if (!link) return;
 
         // Przekazujemy dane na zewnątrz do MainCtrl o tym co zostało kliknięte
@@ -26,7 +26,9 @@ class MenuCtrl {
     }
 
     init(menuClickCallback) {
-        console.log('Menu Ctrl working...')
+        console.log('Menu Ctrl working...');
+
+        // this.view.showHideLinks(false);
 
         this._setListeners(menuClickCallback);
     }
