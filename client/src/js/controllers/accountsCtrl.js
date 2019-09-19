@@ -14,13 +14,15 @@ class AccountsCtrl {
         this.model = new AccountsModel();
     }
 
-    _clickHandler(ev, cb) {
+    async _clickHandler(ev, cb) {
         const accountEl = ev.target.closest(this.view.elStr.singleAccount);
         const accountID = (accountEl) ? accountEl.dataset.id : null;
 
         if (!accountID) return;
 
-        cb(accountID);
+        const account = await this.model.getAccountDetails(accountID);
+        
+        this.view.showDetails(account);
     }
 
     async _createAccountHandler(ev, cb) {
@@ -60,7 +62,11 @@ class AccountsCtrl {
         });
     }
 
-    init(accountClickCallback, addAccountCallback) {
+    async init(accountClickCallback, addAccountCallback) {
+        
+        //Testing
+        await this.model.login();
+        // END
 
         this.view.renderLoader(this.view.el.content);
 

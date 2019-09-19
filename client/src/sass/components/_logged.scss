@@ -10,7 +10,8 @@
         @include centerBlock;
     }
 
-    &__accounts {
+    &__accounts,
+    &__accounts-details {
         text-align: center;
         font-size: 2.5rem;
         background-color: var(--color-gray-5);
@@ -18,6 +19,10 @@
         margin-bottom: 5rem;
         padding: 2rem;
         @include centerBlock;
+    }
+    
+    &__accounts-details {
+        margin-top: 5rem;
     }
 
     // tutaj chcę zrobić losowo wyświetlające się kolory backgroundu z tablicy kolorów
