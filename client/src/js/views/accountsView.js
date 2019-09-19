@@ -10,7 +10,7 @@ class AccountsView extends BaseView {
           singleAccount: '.logged__account',
           addAccountBtn: '.logged__button',
           createAccountBtn: '.logged__button_add',
-          inputType: '.logged__add_input_type',
+          selectType: '.logged__add_select_type',
           inputName: '.logged__add_input_name',
           inputBalance: '.logged__add_input_balance'
         }
@@ -47,9 +47,12 @@ class AccountsView extends BaseView {
         <div class="logged__header">
           <h2>Dodaj konto</h2>
         </div>
-        <div class="logged__container">
-          <input class="logged__add_input_type" type='text' placeholder='Nazwa'/>
-          <input class="logged__add_input_name" type='text' placeholder='Wybierz rodzaj'/>
+        <div class="logged__container_add">
+          <input class="logged__add_input_name" type='text' placeholder='Nazwa konta'/>
+          <select class="logged__add_select_type">
+            <option value="" disabled selected>Wybierz rodzaj</option>
+            <option value="Oszczędnościowe">Oszczędnościowe</option>
+          </select>
           <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
           <div class="logged__add">
             <button class="logged__button_add">+</button>
