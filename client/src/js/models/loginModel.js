@@ -16,14 +16,24 @@ class LoginModel extends BaseModel {
                 body: JSON.stringify(loginData)
             });
 
+            const type = response.headers.get('Content-Type')
             const token = response.headers.get('x-auth-token');
-            const data = await response.json();      
 
+            if(type.indexOf('text') >= 0) {
+                const data = await response.text();
 
-            this.saveAuthToken(token);
-            this.save('user', data);
+                console.log(data)
 
-            return true;
+                return false;
+
+            } else {
+                const data = await response.json();   
+
+                this.saveAuthToken(token);
+                this.save('user', data);
+
+                return true;
+            }
 
         } catch (error) {
             console.log(error);
@@ -39,13 +49,24 @@ class LoginModel extends BaseModel {
                 body: JSON.stringify(loginData)
             });
 
+            const type = response.headers.get('Content-Type')
             const token = response.headers.get('x-auth-token');
-            const data = await response.json();   
 
-            this.saveAuthToken(token);
-            this.save('user', data);
+            if(type.indexOf('text') >= 0) {
+                const data = await response.text();
 
-            return true;
+                console.log(data)
+
+                return false;
+
+            } else {
+                const data = await response.json();   
+
+                this.saveAuthToken(token);
+                this.save('user', data);
+
+                return true;
+            }
 
         } catch (error) {
             console.log(error);
