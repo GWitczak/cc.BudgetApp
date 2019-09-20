@@ -1,11 +1,8 @@
 import MenuCtrl from '../controllers/menuCtrl';
 import HistoryCtrl from '../controllers/historyCtrl';
 import AccountsCtrl from './accountsCtrl';
-<<<<<<< HEAD
 import TransactionsCtrl from './transactionsCtrl';
-=======
 import LoginCtrl from './loginCtrl';
->>>>>>> master
 
 class MainCtrl {
     constructor() {
@@ -89,7 +86,7 @@ class MainCtrl {
         this.menuCtrl.init(
             this.menuClickCallback.bind(this)
         );
-        this.transactionsCtrl.init();
+        this.transactionsCtrl.init(this.createAccount.bind(this));
     }
 }
 

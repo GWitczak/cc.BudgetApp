@@ -131,9 +131,23 @@
         font-size: 1.8rem;
         width: 100%;
         border: none;
-        margin: 20px 0;
+        margin: 1rem 0;
         padding: 14px 18px;
         border-radius: 3px;
+        height: 6.5rem;
+        box-sizing: border-box;
+        color: var(--color-gray-5);
+    }
+
+    &__add_input_amount {
+        font-size: 1.8rem;
+        width: 100%;
+        border: none;
+        margin: 1rem 0;
+        padding: 14px 18px;
+        border-radius: 3px;
+        height: 6.5rem;
+        box-sizing: border-box;
     }
 
 }

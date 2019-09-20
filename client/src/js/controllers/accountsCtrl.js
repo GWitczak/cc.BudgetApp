@@ -54,7 +54,6 @@ class AccountsCtrl {
     _setListeners(accountClickCallback, addAccountCallback) {
         const loggedContainer = this.view.getElementByElStr(this.view.elStr.loggedContainer);
         const addAccBtn = this.view.getElementByElStr(this.view.elStr.addAccountBtn);
-
         loggedContainer.addEventListener('click', (ev) => {
             this._clickHandler(ev, accountClickCallback)
         });

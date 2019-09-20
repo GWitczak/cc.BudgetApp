@@ -1,18 +1,18 @@
 import BaseView from './_baseView';
 
-class AddTransactionView extends BaseView {
+class TransactionsView extends BaseView {
     constructor() {
         super();
 
         this.elStr = {
-            addTransactionBtn: '.logged_button',
-            inputTitle: '.logged_add_input_name',
-            inputType: '.logged_add_select_type',
-            inputCategory: '.logged_add_select_category',
-            inputAmount: '.logged_add_input_balance'
+            addTransactionBtn: '.logged__button_add',
+            inputTitle: '.logged__add_input_name',
+            inputType: '.logged__add_select_type',
+            inputCategory: '.logged__add_select_category',
+            inputAmount: '.logged__add_input_balance'
         }
     }
-
+    
     createTransactionAdd() {
         let add = `
             <div class="logged">
@@ -26,8 +26,8 @@ class AddTransactionView extends BaseView {
                         <option value="exp">Wydatek</option>
                         <option value="inc">Przychód</option>
                     </select>
-                    <input class="logged__add_input_balance" type='text' placeholder='Kwota'/>
-                    <select class="logged__add_select_category">
+                    <input class="logged__add_input_amount" type='text' placeholder='Kwota'/>
+                     <select class="logged__add_select_category">
                         <option value="" disabled selected>Kategoria</option>
                         <option value="Jedzenie">Jedzenie</option>
                         <option value="Rachunki">Rachunki</option>
@@ -51,4 +51,4 @@ class AddTransactionView extends BaseView {
 }
 
 
-export default AddTransactionView;
+export default TransactionsView;
