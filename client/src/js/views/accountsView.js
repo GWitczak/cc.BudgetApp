@@ -13,7 +13,8 @@ class AccountsView extends BaseView {
           selectType: '.logged__add_select_type',
           inputName: '.logged__add_input_name',
           inputBalance: '.logged__add_input_balance',
-          loggedDetails: '.logged__details'
+          loggedDetails: '.logged__details',
+          loggedAddError: '.logged__add_error'
         }
     }
 
@@ -71,6 +72,7 @@ class AccountsView extends BaseView {
             <option value="Oszczędnościowe">Oszczędnościowe</option>
           </select>
           <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
+          <h4 class="logged__add_error"></h4>
           <div class="logged__add">
             <button class="logged__button_add">+</button>
           </div>

@@ -21,9 +21,9 @@ class AccountsCtrl {
         if (!accountID) return;
 
         const account = await this.model.getAccountDetails(accountID);
-        
+
         if(!account) return;
-        
+
         this.view.showDetails(account);
     }
 
@@ -31,10 +31,16 @@ class AccountsCtrl {
         const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
         const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
         const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
+        const error = this.view.getElementByElStr(this.view.elStr.loggedAddError);
 
         const result = await this.model.createAccount(selectType.options[selectType.selectedIndex].value, inputName.value, inputBalance.value);
 
-        cb(result);
+        if(!result.ok)
+            error.innerText = result.statusText;
+        else {
+            error.innerText = '';
+            cb(result);
+        }
     }
 
     _addAccountHandler(ev, cb) {

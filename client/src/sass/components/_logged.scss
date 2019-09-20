@@ -20,7 +20,7 @@
         padding: 2rem;
         @include centerBlock;
     }
-    
+
     &__accounts-details {
         margin-top: 5rem;
     }
@@ -119,6 +119,12 @@
         margin: 20px 0;
         padding: 14px 18px;
         border-radius: 3px;
+    }
+
+    &__add_error {
+        color: red;
+        font-size: 16px;
+        text-align: center;
     }
 
 }
