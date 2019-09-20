@@ -57,34 +57,15 @@ class AccountsModel extends BaseModel {
         }
     }
 
-    async login(loginData = {email: "johny@johny.com", password: "12345"}) {
-            
-        try {
-            const response = await fetch(`${this.baseApiUrl}login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(loginData)
-            });
-
-            const token = response.headers.get('x-auth-token');
-            const data = await response.json();
-
-            console.log('Zalogowany jako:', data);
-            
-            this.saveAuthToken(token);
-            this.save('user', data);
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     async getAccountDetails(accId) {
         this.url = `${this.baseApiUrl}${this.endpoint}`;
 
+        const token = this.getAuthToken();
+        if(!token) return;
+
         try {
             const response = await fetch(`${this.url}`, {
-                headers: {...this.getAuthTokenHeaderObj()}
+                headers: {...token}
             });
             this.user = await response.json();
         } catch (error) {

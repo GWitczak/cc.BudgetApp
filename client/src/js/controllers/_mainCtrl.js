@@ -1,15 +1,27 @@
 import MenuCtrl from '../controllers/menuCtrl';
 import HistoryCtrl from '../controllers/historyCtrl';
 import AccountsCtrl from './accountsCtrl';
+import LoginCtrl from './loginCtrl';
 
 class MainCtrl {
     constructor() {
         this.menuCtrl = new MenuCtrl();
         this.historyCtrl = new HistoryCtrl();
         this.accountsCtrl = new AccountsCtrl();
+        this.loginCtrl = new LoginCtrl();
     }
 
-    // To tylko teoretyczny przykład, nie zawsze musimy wysyłac callbacka
+    afterSuccesLogin(isUserLogged) {
+        this.menuCtrl.view.showHideLinks(isUserLogged);
+
+        if (!isUserLogged) return;
+
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this)
+        );
+    }
+
     moreHistoryClick(params) {
         console.log('moreHistoryClickHandler runs - params:', params);
     }
@@ -32,8 +44,7 @@ class MainCtrl {
     // np. historyCtrl.init() i w init() mamy możliwosc przekazania kolejnych callbacków
     menuClickCallback(linkStr) {
 
-        console.log(linkStr)
-        switch(linkStr.toLowerCase()) {
+        switch(linkStr) {
             case 'history':
                 this.historyCtrl.init(
                     this.moreHistoryClick.bind(this)
@@ -47,6 +58,15 @@ class MainCtrl {
                 );
             break;
 
+            case 'login':
+            case 'register':
+                this.loginCtrl.init(
+                    linkStr,
+                    this.afterSuccesLogin.bind(this)
+                );
+            break;
+
+
             case '...':
                 // odpowiedniCtrl.init(ewentualny callback);
             break;
@@ -57,6 +77,9 @@ class MainCtrl {
 
     init() {
         console.log('Main Ctrl working...');
+
+        // Bez znaczenia na jakim Ctrl to wykonamy
+        this.historyCtrl.model.clearStorage();
 
         this.menuCtrl.init(
             this.menuClickCallback.bind(this)
