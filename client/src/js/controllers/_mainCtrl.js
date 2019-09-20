@@ -1,11 +1,13 @@
 import MenuCtrl from '../controllers/menuCtrl';
 import HistoryCtrl from '../controllers/historyCtrl';
 import AccountsCtrl from './accountsCtrl';
+import TransactionsCtrl from './transactionsCtrl';
 
 class MainCtrl {
     constructor() {
         this.menuCtrl = new MenuCtrl();
         this.historyCtrl = new HistoryCtrl();
+        this.transactionsCtrl = new TransactionsCtrl();
         this.accountsCtrl = new AccountsCtrl();
     }
 
@@ -47,8 +49,8 @@ class MainCtrl {
                 );
             break;
 
-            case '...':
-                // odpowiedniCtrl.init(ewentualny callback);
+            case 'transactions':
+                this.transactionsCtrl.init();
             break;
 
         }
@@ -60,10 +62,7 @@ class MainCtrl {
         this.menuCtrl.init(
             this.menuClickCallback.bind(this)
         );
-        this.accountsCtrl.init(
-            this.loadAccountDetails.bind(this),
-            this.createAccount.bind(this)
-        );
+        this.transactionsCtrl.init();
     }
 }
 
