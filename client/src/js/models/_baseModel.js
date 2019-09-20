@@ -1,34 +1,32 @@
 class BaseModel {
+  constructor() {
+    this.baseApiUrl = "http://localhost:8000/api/";
+  }
 
-    constructor() {
-        this.baseApiUrl = 'http://localhost:8000/api/';
-    }
+  clearStorage() {
+    // localStorage.removeItem('budgetAppToken');
+    // localStorage.removeItem('user');
+  }
 
-    clearStorage() {
-        localStorage.removeItem('budgetAppToken');
-        localStorage.removeItem('user');
-    }
+  getAuthTokenHeaderObj() {
+    return { "x-auth-token": this.getAuthToken() };
+  }
 
-    getAuthTokenHeaderObj() {
-        return { "x-auth-token": this.getAuthToken() };
-    }
+  saveAuthToken(token) {
+    localStorage.setItem("budgetAppToken", token);
+  }
 
-    saveAuthToken(token) {
-        localStorage.setItem('budgetAppToken', token);
-    }
+  save(where, what) {
+    localStorage.setItem(where, JSON.stringify(what));
+  }
 
-    save(where, what) {
-        localStorage.setItem(where, JSON.stringify(what));
-    }
+  load(what) {
+    return JSON.parse(localStorage.getItem(what));
+  }
 
-    load(what) {
-        return JSON.parse(localStorage.getItem(what));
-    }
-
-    getAuthToken() {
-        return localStorage.getItem('budgetAppToken');
-    }
-
+  getAuthToken() {
+    return localStorage.getItem("budgetAppToken");
+  }
 }
 
 export default BaseModel;
