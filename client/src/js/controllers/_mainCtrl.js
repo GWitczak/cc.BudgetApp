@@ -57,6 +57,7 @@ class MainCtrl {
 
     init() {
         console.log('Main Ctrl working...');
+
         this.menuCtrl.init(
             this.menuClickCallback.bind(this)
         );

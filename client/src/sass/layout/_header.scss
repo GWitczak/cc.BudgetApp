@@ -1,42 +1,94 @@
 .header {
-    background-color: var(--color-secondary);
     color: var(--color-white);
-
+    background-color: var(--color-secondary);
+    
     &__container {
-        display: flex;
-        align-items: center;
-        height: 8rem;
-        width: 90%;
+        position: relative;
+        width: 100%;
+        padding: 2rem;
         @include centerBlock;
+        
+        @media screen and (min-width: 50em) {
+            display: flex;
+            height: 8rem;
+            align-items: center;
+        }
     }
     
     &__logo {
-        margin-right: auto;
         font-size: 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media screen and (min-width: 50em) {
+            margin-right: auto;
+        }
     }
 }
 
-.menu {
 
+
+.menu {
+    display: none;
+
+    @media screen and (min-width: 50em) {
+        display: block;
+    }
+
+    &__switcher {
+        position: relative;
+        height: 3.6rem;
+        width: 4rem;
+        border: 1px solid var(--color-gray-2);
+        border-radius: 3px;
+        padding: .5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        @media screen and (min-width: 50em) {
+            display: none;
+        }
+
+        &-line {
+            display: block;
+            height: 2px;
+            background-color: var(--color-gray-2);
+        }
+    }
+
+    
     &__nav {
         font-size: 0;
     }
 
     &__nav-item {
-        display: inline-block;
+        margin-bottom: 1rem;
+
+        @media screen and (min-width: 50em) {
+            display: inline-block;
+            margin-bottom: 0;
+        }
 
         &:not(:last-child) {
-            border-right: 1px solid var(--color-white-opa);
+            @media screen and (min-width: 50em) {
+                border-right: 1px solid var(--color-white-opa);
+            }
         }
     }
 
     &__nav-link {
-        font-size: 2rem;
+        font-size: 2.4rem;
         display: block;
-        padding: 0 3rem;
         color: var(--color-white);
         text-decoration: none;
         transition: color .3s;
+        
+        @media screen and (min-width: 50em) {            
+            padding: 0 2rem;
+            font-size: 1.8rem;
+        }
 
         &:hover,
         &:active {
@@ -45,4 +97,23 @@
 
     }
 
+}
+
+#menu__checkbox {
+    display: none;
+}
+
+#menu__checkbox:checked + .menu{
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-secondary);
+    padding: 2rem;
+
+    @media screen and (min-width: 50em) {
+        padding: 0;
+        position: static;
+    }
 }
