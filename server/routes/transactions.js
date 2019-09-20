@@ -17,7 +17,7 @@ router.post('/', auth, async (req, res) => {
     try {
         let transaction = Transaction.create(req, res);
         if (req.body.type === 'exp') {
-            if (req.body.amount > accountBalance) {
+            if (req.body.amount < accountBalance) {
                 user.globalBalance = user.globalBalance - transaction.amount;
                 accountBalance = accountBalance - transaction.amount;
             } else return res.status(404).send("You don't have enough money to complete payment.");
@@ -28,7 +28,8 @@ router.post('/', auth, async (req, res) => {
         }
         user.wallet[index].history.push(transaction);
         user.wallet[index].balance = accountBalance;
-
+        user.markModified('balance');
+        user.markModified('wallet');
         user.history.push(transaction);
         user = await user.save();
  
