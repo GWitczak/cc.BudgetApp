@@ -16,6 +16,9 @@ class MenuView extends BaseView {
     };
 
     showHideLinks(isLogged) {
+
+        // Powinnismy tutaj USUWAĆ elementy, a nie je ukrywać
+        // TODO
         this.getElementByElStr(this.elStr.jsLogin).style.display = isLogged ? 'none' : 'inline-block' ;
         this.getElementByElStr(this.elStr.jsRegister).style.display = isLogged ? 'none' : 'inline-block';
         this.getElementByElStr(this.elStr.jsAccounts).style.display = isLogged ? 'inline-block' : 'none';

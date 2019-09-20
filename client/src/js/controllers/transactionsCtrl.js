@@ -13,7 +13,7 @@ class TransactionsCtrl {
         const inputCategory = this.view.getElementByElStr(this.view.elStr.inputCategory);
         const inputAmount = this.view.getElementByElStr(this.view.elStr.inputAmount);
 
-
+        const result = this.model.addTransaction('...');
         // przekierowanie do details konta 
         ev.preventDefault();
     }
