@@ -1,6 +1,6 @@
 .header {
     color: var(--color-white);
-    background-color: var(--color-secondary);
+    background-color: var(--color-black);
     
     &__container {
         position: relative;
@@ -25,6 +25,13 @@
             margin-right: auto;
         }
     }
+
+    &__logo p {
+        font-size: 3.5rem;
+        position: absolute;
+        top: 1.5rem;
+        left: 6rem;
+    };
 }
 
 
@@ -92,7 +99,7 @@
 
         &:hover,
         &:active {
-            color: var(--color-gray-4);
+            color: var(--color-primary);
         }
 
     }

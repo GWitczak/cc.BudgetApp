@@ -5,10 +5,10 @@
 
 // default dla nagłówka
 @mixin header{
-    font-size: 2.5rem;
+    font-size: 3rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 0 0 0 15%;
     height: 9rem;
     color: var(--color-text);      
     background-color: var(--color-white-opa);
