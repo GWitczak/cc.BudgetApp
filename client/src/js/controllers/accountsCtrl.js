@@ -22,6 +22,8 @@ class AccountsCtrl {
 
         const account = await this.model.getAccountDetails(accountID);
         
+        if(!account) return;
+        
         this.view.showDetails(account);
     }
 
@@ -63,10 +65,6 @@ class AccountsCtrl {
     }
 
     async init(accountClickCallback, addAccountCallback) {
-        
-        //Testing
-        await this.model.login();
-        // END
 
         this.view.renderLoader(this.view.el.content);
 

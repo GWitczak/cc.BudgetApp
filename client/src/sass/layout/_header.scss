@@ -71,9 +71,9 @@
             margin-bottom: 0;
         }
 
-        &:not(:last-child) {
+        &:not(:first-child) {
             @media screen and (min-width: 50em) {
-                border-right: 1px solid var(--color-white-opa);
+                border-left: 1px solid var(--color-white-opa);
             }
         }
     }

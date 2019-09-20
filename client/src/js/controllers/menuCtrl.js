@@ -28,7 +28,7 @@ class MenuCtrl {
     init(menuClickCallback) {
         console.log('Menu Ctrl working...');
 
-        // this.view.showHideLinks(false);
+        this.view.showHideLinks(false);
 
         this._setListeners(menuClickCallback);
     }
