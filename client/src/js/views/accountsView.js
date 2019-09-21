@@ -42,6 +42,15 @@ class AccountsView extends BaseView {
     return markup;
   };
 
+  displaySingleAccount (accountRecord) {
+    return `
+      <div class="logged__account" data-id="${accountRecord.id}">
+        <p>${accountRecord.name}</p>
+        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
+      </div>
+    `
+  }
+
   deleteAccountView() {
     let deleteAccount = `
     <div class=card>
@@ -97,14 +106,7 @@ class AccountsView extends BaseView {
       return add;
   }
 
-  displaySingleAccount (accountRecord) {
-    return `
-      <div class="logged__account" data-id="${accountRecord.id}">
-        <p>${accountRecord.name}</p>
-        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
-      </div>
-    `
-  }
+  
 
 
     init () {

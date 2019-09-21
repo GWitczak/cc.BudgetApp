@@ -53,14 +53,13 @@ class AccountsCtrl {
   }
 
   // USUWANIE KONTA
-  _deleteAccountHandler(ev, cb){
-    console.log(this.deleteButtonsArray);
-    // const accountEl = ev.target.closest(this.view.elStr.singleAccount);
-    // const accountID = accountEl ? accountEl.dataset.id : null;
-    // const account = this.model.getAccountDetails(accountID);
-    // console.log(account);
-
-
+  async _deleteAccountHandler(ev, cb){
+    const accountEl = ev.target.closest(this.view.elStr.singleAccount);
+    const accountID = accountEl ? accountEl.dataset.id : null;
+    // const account = await this.model.getAccountDetails(accountID);
+    
+    console.log(accountID);
+    await this.model.deleteAccount(accountID);
   }
 
   _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback) {
@@ -82,7 +81,7 @@ class AccountsCtrl {
     //USUWANIE KONTA
     this.deleteButtons = this.view.getElementsByElStr(this.view.elStr.deleteButton);
     this.deleteButtonsArray = [].slice.call(this.deleteButtons);
-    this.deleteButtonsArray.forEach(function (item) {
+    this.deleteButtonsArray.forEach((item) => {
       item.addEventListener("click", ev => {
       this._deleteAccountHandler(ev, deleteAccountCallback);
     });
@@ -92,8 +91,9 @@ class AccountsCtrl {
   async init(accountClickCallback, addAccountCallback, deleteAccountCallback) {
     this.view.renderLoader(this.view.el.content);
 
-    const accounts = this.model.getFakeAccounts();
-    this.model.getAccounts();
+    const accounts = this.model.getAccounts();
+    console.log(account);
+    // this.model.getAccounts();
     this.view.render(
       this.view.el.content,
       this.view.createAccountMarkup(accounts)
