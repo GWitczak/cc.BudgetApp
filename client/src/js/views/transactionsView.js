@@ -9,7 +9,7 @@ class TransactionsView extends BaseView {
             inputTitle: '.logged__add_input_name',
             inputType: '.logged__add_select_type',
             inputCategory: '.logged__add_select_category',
-            inputAmount: '.logged__add_input_balance'
+            inputAmount: '.logged__add_input_amount'
         }
     }
     

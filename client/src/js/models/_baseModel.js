@@ -10,7 +10,7 @@ class BaseModel {
     }
 
     getAuthTokenHeaderObj() {
-        return { "x-auth-token": this.getAuthToken() };
+        return { "x-auth-token": 'this.getAuthToken()' };
     }
 
     saveAuthToken(token) {

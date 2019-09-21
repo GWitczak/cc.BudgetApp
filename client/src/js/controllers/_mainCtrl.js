@@ -48,9 +48,7 @@ class MainCtrl {
 
         switch(linkStr) {
             case 'history':
-                this.historyCtrl.init(
-                    this.moreHistoryClick.bind(this)
-                );
+                this.transactionsCtrl.init(this.createAccount.bind(this));
             break;
 
             case 'accounts':

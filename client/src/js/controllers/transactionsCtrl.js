@@ -13,7 +13,16 @@ class TransactionsCtrl {
         const inputCategory = this.view.getElementByElStr(this.view.elStr.inputCategory).value;
         const inputAmount = this.view.getElementByElStr(this.view.elStr.inputAmount).value;
 
-        const result = await this.model.addTransaction('...');
+        const data = {
+            accountType: 'account',
+            title: inputTitle,
+            type: inputType,
+            category: inputCategory,
+            amount: inputAmount,
+            wallet_id: '5d83bf1d9680274ae8d818c9'
+        }
+
+        const result = await this.model.addTransaction(data);
         // przekierowanie do details konta 
         ev.preventDefault();
     }
