@@ -25,12 +25,11 @@ class AccountsCtrl {
     this.view.showDetails(account);
   }
 
+   // DODAWANIE KONTA
   async _createAccountHandler(ev, cb) {
     const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
     const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
-    const inputBalance = this.view.getElementByElStr(
-      this.view.elStr.inputBalance
-    );
+    const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
 
     const result = await this.model.createAccount(
       selectType.options[selectType.selectedIndex].value,
@@ -53,7 +52,18 @@ class AccountsCtrl {
     });
   }
 
-  _setListeners(accountClickCallback, addAccountCallback) {
+  // USUWANIE KONTA
+  _deleteAccountHandler(ev, cb){
+    console.log(this.deleteButtonsArray);
+    // const accountEl = ev.target.closest(this.view.elStr.singleAccount);
+    // const accountID = accountEl ? accountEl.dataset.id : null;
+    // const account = this.model.getAccountDetails(accountID);
+    // console.log(account);
+
+
+  }
+
+  _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback) {
     const loggedContainer = this.view.getElementByElStr(
       this.view.elStr.loggedContainer
     );
@@ -68,9 +78,18 @@ class AccountsCtrl {
     addAccBtn.addEventListener("click", ev => {
       this._addAccountHandler(ev, addAccountCallback);
     });
+
+    //USUWANIE KONTA
+    this.deleteButtons = this.view.getElementsByElStr(this.view.elStr.deleteButton);
+    this.deleteButtonsArray = [].slice.call(this.deleteButtons);
+    this.deleteButtonsArray.forEach(function (item) {
+      item.addEventListener("click", ev => {
+      this._deleteAccountHandler(ev, deleteAccountCallback);
+    });
+  })
   }
 
-  async init(accountClickCallback, addAccountCallback) {
+  async init(accountClickCallback, addAccountCallback, deleteAccountCallback) {
     this.view.renderLoader(this.view.el.content);
 
     const accounts = this.model.getFakeAccounts();
@@ -80,7 +99,7 @@ class AccountsCtrl {
       this.view.createAccountMarkup(accounts)
     );
 
-    this._setListeners(accountClickCallback, addAccountCallback);
+    this._setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback);
   }
 }
 
