@@ -14,29 +14,14 @@ class AccountsModel extends BaseModel {
 
     const token = this.getAuthToken();
 
-    if (!token)
-      return console.log(
-        "Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego."
-      );
+    if (!token) return {error:'Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego.'};
 
     // wysłanie danych na serwer
-    try {
-      // nie do końca rozumiem czym dokładnie jest x-auth-token
-      const rawData = await fetch(this.url, {
-        method: "POST",
-        headers: {
-          ...this.getAuthTokenHeaderObj(),
-          body: JSON.stringify({ type: type, name: name, balance: balance })
-        }
-      });
-
-      this.account = await rawData.json();
-
-      // zwrócenie pobranych danych
-      return this.account;
-    } catch (error) {
-      console.log(error);
-    }
+    return await fetch(this.url, {
+      method: 'POST',
+      headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({type: type, name: name, balance: balance})
+    });
   }
 
   async getAccounts() {
@@ -56,8 +41,8 @@ class AccountsModel extends BaseModel {
         headers: { ...token }
       });
 
-      this.accounts = await response.json();
-      console.log(this.accounts);
+      this.usersData = await response.json();
+      this.accounts = this.usersData.wallet;
       // zwrócenie pobranych danych
       return this.accounts;
     } catch (error) {
@@ -86,7 +71,7 @@ class AccountsModel extends BaseModel {
   }
 
   async deleteAccount(accId) {
-    this.url = `${this.baseApiUrl}${deleteEndpoint}/${accId}`;
+    this.url = `${this.baseApiUrl}${this.deleteEndpoint}/${accId}`;
 
     const token = this.getAuthTokenHeaderObj();
 
