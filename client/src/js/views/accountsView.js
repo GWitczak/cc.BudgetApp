@@ -13,13 +13,16 @@ class AccountsView extends BaseView {
           selectType: '.logged__add_select_type',
           inputName: '.logged__add_input_name',
           inputBalance: '.logged__add_input_balance',
-          loggedDetails: '.logged__details'
+          loggedDetails: '.logged__details',
+          deleteButton: '.logged__icon'
         }
     }
 
-  createAccountMarkup(account) {
+  createAccountMarkup(accounts) {
     let recordsMarkup = ``;
-    account.forEach(record => recordsMarkup += this.displaySingleAccount(record));
+    console.log(accounts);
+
+    accounts.forEach(record => recordsMarkup += this.displaySingleAccount(record));
 
     let markup = `
       <div class="logged">
@@ -39,7 +42,32 @@ class AccountsView extends BaseView {
       </div>
     `;
     return markup;
+  };
 
+  displaySingleAccount (accountRecord) {
+    return `
+      <div class="logged__account" data-id="${accountRecord._id}">
+        <p>${accountRecord.name}</p>
+        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
+      </div>
+    `
+  }
+
+  deleteAccountView() {
+    let deleteAccount = `
+    <div class=card>
+      <div class="content">
+        Jesteś pewny, że chcesz usunąć konto?
+      </div>
+      <div class="extra content">
+        <div class="ui two buttons">
+          <div class="ui basic green button">Tak</div>
+          <div class="ui basic red button">Nie</div>
+        </div>
+      </div>
+    </div>
+    `;
+    return deleteAccount;
   }
 
   showDetails(account) {
@@ -80,14 +108,7 @@ class AccountsView extends BaseView {
       return add;
   }
 
-  displaySingleAccount (accountRecord) {
-    return `
-      <div class="logged__account" data-id="${accountRecord.id}">
-        <p>${accountRecord.name}</p>
-        <p>${accountRecord.balance} <i class="trash alternate icon"></i></p>
-      </div>
-    `
-  }
+  
 
 
     init () {

@@ -64,6 +64,10 @@
         }
     }
 
+    &__icon {
+        box-sizing: border-box; 
+    }
+
     &__container_add {
         @include container;
         @include centerBlock;
