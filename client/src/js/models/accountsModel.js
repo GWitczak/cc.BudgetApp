@@ -70,10 +70,11 @@ class AccountsModel extends BaseModel {
 
     try {
       const response = await fetch(`${this.url}`, {
-        headers: { ...token }
+        headers: { ...this.getAuthTokenHeaderObj() }
       });
 
       this.user = await response.json();
+
     } catch (error) {
       console.log(error);
     }
