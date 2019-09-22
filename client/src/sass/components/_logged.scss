@@ -18,7 +18,7 @@
         padding: 2rem 2rem 2rem 8%;
         @include centerBlock;
     }
-    
+
     &__accounts-details {
         margin-top: 5rem;
     }
@@ -36,7 +36,7 @@
         align-items: center;
         border-bottom: 1px solid var(--color-gray-1);
         transition: background-color .3s;
-      
+
 
         &:hover {
             background-color: var(--color-white);
@@ -64,6 +64,10 @@
         }
     }
 
+    &__icon {
+        box-sizing: border-box;
+    }
+
     &__container_add {
         @include container;
         @include centerBlock;
@@ -79,6 +83,7 @@
         background-color: var(--color-primary-light);
         border: none;
         transition: background-color .3s;
+        margin-top: 7rem;
 
         &:hover,
         &:active {
@@ -120,12 +125,18 @@
         font-size: 1.8rem;
         width: 100%;
         border: none;
-        margin: 1rem 0 7rem 0;
+        margin: 1rem 0 1rem 0;
         padding: 14px 18px;
         border-radius: 3px;
         height: 6.5rem;
         box-sizing: border-box;
-    ;}
+    }
+
+    &__add_error {
+        color: red;
+        font-size: 16px;
+        text-align: center;
+    }
 
     &__add_select_category {
         font-size: 1.8rem;

@@ -31,17 +31,19 @@ transferSchema.statics.create = function createTransfer(req, res) {
     if (error) return res.status(400).send(error.details[0].message);
 
     return new Transfer({ 
-      idAccountFrom: transfer.idAccountFrom,
-      idAccountTo: transfer.idAccountTo,
-      amount: transfer.amount,
-      title: transfer.title
+      idAccountFrom: req.body.idAccountFrom,
+      idAccountTo: req.body.idAccountTo,
+      amount: req.body.amount,
+      title: req.body.title
     });
 }
 
-const Transfer = mongoose.model('Transfer', TransferSchema);
+const Transfer = mongoose.model('Transfer', transferSchema);
 
 function validateTransfer(transfer) {
   const schema = {
+      idAccountFrom: Joi.string().required(),
+      idAccountTo: Joi.string().required(),
       amount: Joi.number().min(1).max(10000).required(),
       title: Joi.string().min(5).max(30).required()
   };

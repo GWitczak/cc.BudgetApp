@@ -13,13 +13,17 @@ class AccountsView extends BaseView {
           selectType: '.logged__add_select_type',
           inputName: '.logged__add_input_name',
           inputBalance: '.logged__add_input_balance',
-          loggedDetails: '.logged__details'
+          loggedDetails: '.logged__details',
+          deleteButton: '.logged__icon',
+          loggedAddError: '.logged__add_error'
         }
     }
 
-  createAccountMarkup(account) {
+  createAccountMarkup(accounts) {
     let recordsMarkup = ``;
-    account.forEach(record => recordsMarkup += this.displaySingleAccount(record));
+    console.log(accounts);
+
+    accounts.forEach(record => recordsMarkup += this.displaySingleAccount(record));
 
     let markup = `
       <div class="logged">
@@ -39,7 +43,37 @@ class AccountsView extends BaseView {
       </div>
     `;
     return markup;
+  };
 
+  displaySingleAccount (accountRecord) {
+      let name = '';
+      if(!accountRecord.name)
+          name = accountRecord.owner;
+      else
+          name = accountRecord.name;
+    return `
+      <div class="logged__account" data-id="${accountRecord._id}">
+        <p>${name}</p>
+        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
+      </div>
+    `
+  }
+
+  deleteAccountView() {
+    let deleteAccount = `
+    <div class=card>
+      <div class="content">
+        Jesteś pewny, że chcesz usunąć konto?
+      </div>
+      <div class="extra content">
+        <div class="ui two buttons">
+          <div class="ui basic green button">Tak</div>
+          <div class="ui basic red button">Nie</div>
+        </div>
+      </div>
+    </div>
+    `;
+    return deleteAccount;
   }
 
   showDetails(account) {
@@ -68,9 +102,11 @@ class AccountsView extends BaseView {
           <input class="logged__add_input_name" type='text' placeholder='Nazwa konta'/>
           <select class="logged__add_select_type">
             <option value="" disabled selected>Wybierz rodzaj</option>
-            <option value="Oszczędnościowe">Oszczędnościowe</option>
+            <option value="account">account</option>
+            <option value="debitCard">debitCard</option>
           </select>
           <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
+          <h4 class="logged__add_error"></h4>
           <div class="logged__add">
             <button class="logged__button_add">+</button>
           </div>
@@ -80,14 +116,7 @@ class AccountsView extends BaseView {
       return add;
   }
 
-  displaySingleAccount (accountRecord) {
-    return `
-      <div class="logged__account" data-id="${accountRecord.id}">
-        <p>${accountRecord.name}</p>
-        <p>${accountRecord.balance} <i class="trash alternate icon"></i></p>
-      </div>
-    `
-  }
+
 
 
     init () {

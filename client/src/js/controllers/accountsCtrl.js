@@ -25,20 +25,26 @@ class AccountsCtrl {
     this.view.showDetails(account);
   }
 
+   // DODAWANIE KONTA
   async _createAccountHandler(ev, cb) {
     const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
     const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
-    const inputBalance = this.view.getElementByElStr(
-      this.view.elStr.inputBalance
-    );
+    const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
+    const error = this.view.getElementByElStr(this.view.elStr.loggedAddError);
 
     const result = await this.model.createAccount(
       selectType.options[selectType.selectedIndex].value,
       inputName.value,
-      inputBalance.value
+      parseFloat(inputBalance.value)
     );
 
-    cb(result);
+    if(!result.ok)
+      error.innerText = result.statusText;
+    else {
+      error.innerText = '';
+      cb(result);
+    }
+
   }
 
   _addAccountHandler(ev, cb) {
@@ -53,7 +59,24 @@ class AccountsCtrl {
     });
   }
 
-  _setListeners(accountClickCallback, addAccountCallback) {
+  // USUWANIE KONTA
+  async _deleteAccountHandler(ev, cb){
+    const accountEl = ev.target.closest(this.view.elStr.singleAccount);
+    const accountID = accountEl ? accountEl.dataset.id : null;
+    // const account = await this.model.getAccountDetails(accountID);
+
+    console.log(accountID);
+    await this.model.deleteAccount(accountID);
+
+    const accounts = await this.model.getAccounts();
+    this.view.render(
+      this.view.el.content,
+      this.view.createAccountMarkup(accounts)
+    );
+
+  }
+
+  _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback) {
     const loggedContainer = this.view.getElementByElStr(
       this.view.elStr.loggedContainer
     );
@@ -68,19 +91,27 @@ class AccountsCtrl {
     addAccBtn.addEventListener("click", ev => {
       this._addAccountHandler(ev, addAccountCallback);
     });
+
+    //USUWANIE KONTA
+    this.deleteButtons = this.view.getElementsByElStr(this.view.elStr.deleteButton);
+    this.deleteButtonsArray = [].slice.call(this.deleteButtons);
+    this.deleteButtonsArray.forEach((item) => {
+      item.addEventListener("click", ev => {
+      this._deleteAccountHandler(ev, deleteAccountCallback);
+    });
+  })
   }
 
-  async init(accountClickCallback, addAccountCallback) {
+  async init(accountClickCallback, addAccountCallback, deleteAccountCallback) {
     this.view.renderLoader(this.view.el.content);
 
-    const accounts = this.model.getFakeAccounts();
-    this.model.getAccounts();
+    const accounts = await this.model.getAccounts();
     this.view.render(
       this.view.el.content,
       this.view.createAccountMarkup(accounts)
     );
 
-    this._setListeners(accountClickCallback, addAccountCallback);
+    this._setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback);
   }
 }
 
