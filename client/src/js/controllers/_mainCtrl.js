@@ -84,7 +84,10 @@ class MainCtrl {
         this.menuCtrl.init(
             this.menuClickCallback.bind(this)
         );
-        this.transactionsCtrl.init(this.createAccount.bind(this));
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this)
+        );
     }
 }
 

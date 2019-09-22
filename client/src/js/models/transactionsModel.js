@@ -9,7 +9,7 @@ class TransactionsModel extends BaseModel {
 
     async addTransaction(data) {
         this.url = `${this.baseApiUrl}${this.endpoint}`;
-        const token = this.getAuthToken();
+        const token = this.getAuthTokenHeaderObj();
 
         console.log(token);
         if (!token) return console.log('Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego.');
@@ -17,7 +17,10 @@ class TransactionsModel extends BaseModel {
         try {
             const response = await fetch(this.url, {
                 method: 'POST',
-                headers: { ...token },
+                headers: {
+                    'Content-Type': 'application/json',
+                    token
+                },
                 body: JSON.stringify(data)
                 
             });
