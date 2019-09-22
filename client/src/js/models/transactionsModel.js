@@ -9,8 +9,8 @@ class TransactionsModel extends BaseModel {
 
     async addTransaction(data) {
         this.url = `${this.baseApiUrl}${this.endpoint}`;
-        const token = this.getAuthTokenHeaderObj();
-
+        const token = this.getAuthToken();
+        console.log(data);
         console.log(token);
         if (!token) return console.log('Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego.');
 
@@ -18,15 +18,15 @@ class TransactionsModel extends BaseModel {
             const response = await fetch(this.url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    token
+                    'x-auth-token': token,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
                 
             });
             this.data = await response.json();
 
-            return true;
+            return response;
         } catch (err) {
             console.log(err);
             return false;

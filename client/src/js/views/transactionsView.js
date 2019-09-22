@@ -23,8 +23,8 @@ class TransactionsView extends BaseView {
                     <input class="logged__add_input_name" type='text' placeholder='Tytuł'/>
                     <select class="logged__add_select_type">
                         <option value="" disabled selected>Wybierz rodzaj</option>
-                        <option value="exp">Wydatek</option>
-                        <option value="inc">Przychód</option>
+                        <option value="Wydatek">Wydatek</option>
+                        <option value="Przychod">Przychód</option>
                     </select>
                     <input class="logged__add_input_amount" type='text' placeholder='Kwota'/>
                      <select class="logged__add_select_category">
@@ -38,6 +38,8 @@ class TransactionsView extends BaseView {
                         <option value="Wakacje">Wakacje</option>
                         <option value="Odzież">Odzież</option>
                         <option value="Prezenty">Prezenty</option>
+                        <option value="Wyplata">Wypłata</option>
+                        <option value="Wplata">Wplata</option>
                     </select>
                     <div class="logged__add">
                         <button class="logged__button_add">+</button>

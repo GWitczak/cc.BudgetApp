@@ -20,7 +20,8 @@ class MainCtrl {
 
         this.accountsCtrl.init(
             this.loadAccountDetails.bind(this),
-            this.createAccount.bind(this)
+            this.createAccount.bind(this),
+            this.addTransaction.bind(this)
         );
     }
 
@@ -36,10 +37,17 @@ class MainCtrl {
         console.log('createAccount from mainCtrl', result);
         this.accountsCtrl.init(
             this.loadAccountDetails.bind(this),
-            this.createAccount.bind(this)
+            this.createAccount.bind(this),
+            this.addTransaction.bind(this)
         );
     }
 
+    addAccount(result) {
+        console.log('createAccount from mainCtrl', result);
+        this.transactionsCtrl.init(
+            this.loadAccountDetails.bind(this)
+        );     
+    }
     // Tutaj callback jest przydatny -> MenuCtrl ustawia listenera na elementach menu,
     // po czym wysyła do MainCtrl informacje o tym co zostało kliknięte (params),
     // na podstawie tych informacji możemy z poziomu MainCtrl inicjalizowac odpowiednie kontrolery
@@ -48,13 +56,16 @@ class MainCtrl {
 
         switch(linkStr) {
             case 'history':
-                this.transactionsCtrl.init(this.createAccount.bind(this));
+                this.historyCtrl.init(
+                    this.moreHistoryClick.bind(this)
+                );
             break;
 
             case 'accounts':
                 this.accountsCtrl.init(
                     this.loadAccountDetails.bind(this),
-                    this.createAccount.bind(this)
+                    this.createAccount.bind(this),
+                    this.addTransaction.bind(this)
                 );
             break;
 
@@ -74,6 +85,17 @@ class MainCtrl {
         }
 
     }
+    afterTransaction() {
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this),
+            this.addTransaction.bind(this)
+        );
+    }
+
+    addTransaction(data) {
+        this.transactionsCtrl.init(data, this.afterTransaction.bind(this));
+    }
 
     init() {
         console.log('Main Ctrl working...');
@@ -86,7 +108,8 @@ class MainCtrl {
         );
         this.accountsCtrl.init(
             this.loadAccountDetails.bind(this),
-            this.createAccount.bind(this)
+            this.createAccount.bind(this),
+            this.addTransaction.bind(this)
         );
     }
 }

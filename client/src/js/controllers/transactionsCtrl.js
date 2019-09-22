@@ -7,41 +7,42 @@ class TransactionsCtrl {
         this.model = new TransactionsModel();
     }
 
-    async _addtransactionHandler(ev , addTransactionCallback) {
+    async _addtransactionHandler(ev , accountData, list) {
         const inputTitle = this.view.getElementByElStr(this.view.elStr.inputTitle).value;
         const inputType = this.view.getElementByElStr(this.view.elStr.inputType).value;
         const inputCategory = this.view.getElementByElStr(this.view.elStr.inputCategory).value;
         const inputAmount = this.view.getElementByElStr(this.view.elStr.inputAmount).value;
 
         const data = {
-            accountType: 'account',
+            accountType: accountData.accountType,
             title: inputTitle,
             type: inputType,
             category: inputCategory,
             amount: inputAmount,
-            wallet_id: '5d7fcbc4ed0ba8705308c2e1',
-            cardOwner: 'z acc'
+            wallet_id: accountData.accountID,
+            cardOwner: accountData.cardOwner
         }
 
         const result = await this.model.addTransaction(data);
         // przekierowanie do details konta 
+        if(result) list();
         ev.preventDefault();
     }
 
-    _setListeners(addTransactionCallback) {
+    _setListeners(accountData, list) {
         const addTransactionBtn = this.view.getElementByElStr(this.view.elStr.addTransactionBtn);
         addTransactionBtn.addEventListener('click', (ev) => {
-            this._addtransactionHandler(ev, addTransactionCallback);
+            this._addtransactionHandler(ev, accountData, list);
         })
     }
 
 
-    async init(addTransactionCallback) {
+    async init(data, list) {
         this.view.renderLoader(this.view.el.content);
 
         this.view.render(this.view.el.content, this.view.createTransactionAdd());
 
-        this._setListeners(addTransactionCallback);
+        this._setListeners(data, list);
     }
 }
 

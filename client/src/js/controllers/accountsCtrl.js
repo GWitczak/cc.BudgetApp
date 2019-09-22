@@ -76,13 +76,28 @@ class AccountsCtrl {
 
   }
 
-  _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback) {
+  async _addTransactionHandler(ev, cb) {
+    const accountEl = ev.target.closest(this.view.elStr.singleAccount);
+    const accountID = accountEl ? accountEl.dataset.id : null;
+    const account = await this.model.getAccountDetails(accountID);
+    const cardOwner = 'sam';
+
+    const data = {
+      accountID: accountID ,
+      cardOwner: cardOwner,
+      accountType: account.type
+    }
+    cb(data);
+  }
+
+  _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback, addTransactionCallback) {
     const loggedContainer = this.view.getElementByElStr(
       this.view.elStr.loggedContainer
     );
     const addAccBtn = this.view.getElementByElStr(
       this.view.elStr.addAccountBtn
     );
+    const addTransactionBtn = this.view.getElementByElStr(this.view.elStr.addTransactionButton);
 
     loggedContainer.addEventListener("click", ev => {
       this._clickHandler(ev, accountClickCallback);
@@ -91,6 +106,10 @@ class AccountsCtrl {
     addAccBtn.addEventListener("click", ev => {
       this._addAccountHandler(ev, addAccountCallback);
     });
+
+    addTransactionBtn.addEventListener('click', ev => {
+      this._addTransactionHandler(ev, addTransactionCallback);
+    })
 
     //USUWANIE KONTA
     this.deleteButtons = this.view.getElementsByElStr(this.view.elStr.deleteButton);
@@ -102,7 +121,7 @@ class AccountsCtrl {
   })
   }
 
-  async init(accountClickCallback, addAccountCallback, deleteAccountCallback) {
+  async init(accountClickCallback, addAccountCallback, addTransactionCallback, deleteAccountCallback) {
     this.view.renderLoader(this.view.el.content);
 
     const accounts = await this.model.getAccounts();
@@ -111,7 +130,7 @@ class AccountsCtrl {
       this.view.createAccountMarkup(accounts)
     );
 
-    this._setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback);
+    this._setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback, addTransactionCallback);
   }
 }
 
