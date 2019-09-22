@@ -35,7 +35,7 @@ class AccountsCtrl {
     const result = await this.model.createAccount(
       selectType.options[selectType.selectedIndex].value,
       inputName.value,
-      inputBalance.value
+      parseFloat(inputBalance.value)
     );
 
     if(!result.ok)

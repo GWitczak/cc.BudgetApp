@@ -7,21 +7,33 @@ class AccountsModel extends BaseModel {
     super();
     this.endpoint = "users";
     this.deleteEndpoint = "wallet";
+    this.addEndpoint = "wallet";
   }
 
   async createAccount(type, name, balance) {
-    this.url = `${this.baseApiUrl}${this.endpoint}`;
+    this.url = `${this.baseApiUrl}${this.addEndpoint}`;
 
     const token = this.getAuthToken();
 
-    if (!token) return {error:'Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego.'};
-
+    if (!token) return {ok: false, statusText: 'Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego.'};
     // wysłanie danych na serwer
-    return await fetch(this.url, {
-      method: 'POST',
-      headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
-      body: JSON.stringify({type: type, name: name, balance: balance})
-    });
+    let status = false;
+    if(type === 'debitCard')
+      return await fetch(this.url, {
+        method: 'POST',
+        headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
+        body: JSON.stringify({type: type, balance: 0, owner: name})
+      })
+          .then(res => {status = res.ok; return res.text()})
+          .then(res =>{ return {ok: status, statusText: res}});
+    else
+      return await fetch(this.url, {
+        method: 'POST',
+        headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
+        body: JSON.stringify({type: type, name: name, balance: balance})
+      })
+          .then(res => {status = res.ok; return res.text()})
+          .then(res =>{ return {ok: status, statusText: res}});
   }
 
   async getAccounts() {
