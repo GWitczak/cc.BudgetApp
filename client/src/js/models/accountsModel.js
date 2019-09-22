@@ -22,7 +22,7 @@ class AccountsModel extends BaseModel {
       return await fetch(this.url, {
         method: 'POST',
         headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
-        body: JSON.stringify({type: type, balance: 0, owner: name})
+        body: JSON.stringify({type: type, balance: balance, owner: name})
       })
           .then(res => {status = res.ok; return res.text()})
           .then(res =>{ return {ok: status, statusText: res}});
