@@ -59,6 +59,7 @@ transactionSchema.statics.create = function createTransaction(req, res) {
     let transaction = new Transaction({
         accountType: accountType,
         title: req.body.title,
+        type: req.body.type,
         amount: req.body.amount,
         category: req.body.category,
         wallet_id: req.body.wallet_id
@@ -79,10 +80,11 @@ function validateTransaction(transaction) {
     return Joi.validate(transaction, {
         accountType: ['debitCard', 'cash', 'account'],
         amount: Joi.number().min(0).required(),
-        type: ['exp', 'inc'],
+        type: ['Wydatek', 'Przychod'],
         title: Joi.string().required(),
-        category: ['bills', 'food', 'transport', 'home', 'salary', 'allowance'],
-        wallet_id: Joi.string().required()
+        category: ['Rachunki', 'Jedzenie', 'Samochód', 'Rozrywka', 'Ogólne', 'Wakacje', 'Zdrowie', 'Wyplata', 'Wplata', 'Odzież', 'Prezenty'],
+        wallet_id: Joi.string().required(),
+        cardOwner: Joi.string().required()
 
     })
 }
