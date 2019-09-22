@@ -30,6 +30,7 @@ class AccountsCtrl {
     const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
     const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
     const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
+    const error = this.view.getElementByElStr(this.view.elStr.loggedAddError);
 
     const result = await this.model.createAccount(
       selectType.options[selectType.selectedIndex].value,
@@ -37,7 +38,13 @@ class AccountsCtrl {
       inputBalance.value
     );
 
-    cb(result);
+    if(!result.ok)
+      error.innerText = result.statusText;
+    else {
+      error.innerText = '';
+      cb(result);
+    }
+
   }
 
   _addAccountHandler(ev, cb) {
@@ -57,7 +64,7 @@ class AccountsCtrl {
     const accountEl = ev.target.closest(this.view.elStr.singleAccount);
     const accountID = accountEl ? accountEl.dataset.id : null;
     // const account = await this.model.getAccountDetails(accountID);
-    
+
     console.log(accountID);
     await this.model.deleteAccount(accountID);
 
