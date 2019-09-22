@@ -15,6 +15,7 @@ class AccountsView extends BaseView {
           inputBalance: '.logged__add_input_balance',
           loggedDetails: '.logged__details',
           deleteButton: '.logged__icon',
+          addTransactionButton: '.logged__icon_add',
           loggedAddError: '.logged__add_error',
           inputOwner: '.logged__add_input_owner',
           inputMaxDebit: '.logged__add_input_maxDebit',
@@ -58,7 +59,8 @@ class AccountsView extends BaseView {
     return `
       <div class="logged__account" data-id="${accountRecord._id}">
         <p>${name}</p>
-        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
+        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i>
+        <i class="logged__icon_add add alternate icon"></i></p>
       </div>
     `
   }
