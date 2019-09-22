@@ -16,7 +16,6 @@ class AccountsView extends BaseView {
           loggedDetails: '.logged__details',
           deleteButton: '.logged__icon',
           addTransactionButton: '.logged__icon_add',
-          loggedAddError: '.logged__add_error'
           loggedAddError: '.logged__add_error',
           inputOwner: '.logged__add_input_owner',
           inputMaxDebit: '.logged__add_input_maxDebit',

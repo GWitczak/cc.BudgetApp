@@ -129,11 +129,9 @@ class AccountsCtrl {
     const accountEl = ev.target.closest(this.view.elStr.singleAccount);
     const accountID = accountEl ? accountEl.dataset.id : null;
     const account = await this.model.getAccountDetails(accountID);
-    const cardOwner = 'sam';
-
     const data = {
       accountID: accountID ,
-      cardOwner: cardOwner,
+      cardOwner: account.owner,
       accountType: account.type
     }
     cb(data);
