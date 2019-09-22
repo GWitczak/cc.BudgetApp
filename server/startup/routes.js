@@ -6,6 +6,7 @@ const userRouter = require('../routes/users');
 const loginRouter = require('../routes/login');
 const walletRouter = require('../routes/wallet');
 const transactionRouter = require('../routes/transactions');
+const transferRouter = require('../routes/transfers');
 
 const error = require('../middleware/error');
 
@@ -20,6 +21,7 @@ module.exports = function(app) {
   app.use('/api/login', loginRouter);
   app.use('/api/wallet', walletRouter);
   app.use('/api/transactions', transactionRouter);
+  app.use('/api/transfers', transferRouter);
 
   app.use('/api/tests', testRouter);
 

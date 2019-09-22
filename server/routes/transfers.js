@@ -35,17 +35,13 @@ router.post('/', auth, async (req, res) => {
         user.history.push(transfer);
         user.wallet[idx1].history.push(transfer);
         user.wallet[idx2].history.push(transfer);
+        user.markModified('wallet');
         user = await user.save();
         res.send(transfer);
 
     } catch (err) {
         res.status(500).send(err.message);
     }    
-
-
-
-
-        
 });
 
 module.exports = router;
