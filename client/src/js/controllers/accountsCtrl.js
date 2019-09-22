@@ -25,17 +25,60 @@ class AccountsCtrl {
     this.view.showDetails(account);
   }
 
+  // RENDER WIDOKU DODAWANIA KONTA
+  _renderCreateAccountView(e) {
+    let selectType = e.target.options[e.target.selectedIndex].value;
+    const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
+    const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
+    const inputBalanceCash = this.view.getElementByElStr(this.view.elStr.inputBalanceCash);
+    const inputBalanceDebit = this.view.getElementByElStr(this.view.elStr.inputBalanceDebit);
+    const inputMaxDebit = this.view.getElementByElStr(this.view.elStr.inputMaxDebit);
+    const inputOwner = this.view.getElementByElStr(this.view.elStr.inputOwner);
+
+    if(selectType === 'account') {
+      inputName.classList.remove('logged__add_invisible');
+      inputBalance.classList.remove('logged__add_invisible');
+      inputBalanceCash.classList.add('logged__add_invisible');
+      inputBalanceDebit.classList.add('logged__add_invisible');
+      inputMaxDebit.classList.add('logged__add_invisible');
+      inputOwner.classList.add('logged__add_invisible');
+    }else if(selectType === 'debitCard') {
+      inputName.classList.add('logged__add_invisible');
+      inputBalance.classList.add('logged__add_invisible');
+      inputBalanceCash.classList.add('logged__add_invisible');
+      inputBalanceDebit.classList.remove('logged__add_invisible');
+      inputMaxDebit.classList.remove('logged__add_invisible');
+      inputOwner.classList.remove('logged__add_invisible');
+    }else if(selectType === 'cash') {
+      inputName.classList.add('logged__add_invisible');
+      inputBalance.classList.add('logged__add_invisible');
+      inputBalanceCash.classList.remove('logged__add_invisible');
+      inputBalanceDebit.classList.add('logged__add_invisible');
+      inputMaxDebit.classList.add('logged__add_invisible');
+      inputOwner.classList.add('logged__add_invisible');
+    }
+
+  }
+
    // DODAWANIE KONTA
   async _createAccountHandler(ev, cb) {
     const selectType = this.view.getElementByElStr(this.view.elStr.selectType);
     const inputName = this.view.getElementByElStr(this.view.elStr.inputName);
     const inputBalance = this.view.getElementByElStr(this.view.elStr.inputBalance);
+    const inputBalanceCash = this.view.getElementByElStr(this.view.elStr.inputBalanceCash);
+    const inputBalanceDebit = this.view.getElementByElStr(this.view.elStr.inputBalanceDebit);
+    const inputMaxDebit = this.view.getElementByElStr(this.view.elStr.inputMaxDebit);
+    const inputOwner = this.view.getElementByElStr(this.view.elStr.inputOwner);
     const error = this.view.getElementByElStr(this.view.elStr.loggedAddError);
 
     const result = await this.model.createAccount(
       selectType.options[selectType.selectedIndex].value,
       inputName.value,
-      parseFloat(inputBalance.value)
+      parseFloat(inputBalance.value),
+      parseFloat(inputBalanceCash.value),
+      parseFloat(inputBalanceDebit.value),
+      inputMaxDebit.value,
+      inputOwner.value
     );
 
     if(!result.ok)
@@ -50,9 +93,15 @@ class AccountsCtrl {
   _addAccountHandler(ev, cb) {
     this.view.render(this.view.el.content, this.view.createAccountAdd());
 
+    const selectType = this.view.getElementByElStr(
+        this.view.elStr.selectType
+    );
+
     const createAccBtn = this.view.getElementByElStr(
       this.view.elStr.createAccountBtn
     );
+
+    selectType.addEventListener('change', this._renderCreateAccountView.bind(this));
 
     createAccBtn.addEventListener("click", async ev => {
       await this._createAccountHandler(ev, cb);
