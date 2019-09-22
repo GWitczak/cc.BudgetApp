@@ -15,7 +15,11 @@ class AccountsView extends BaseView {
           inputBalance: '.logged__add_input_balance',
           loggedDetails: '.logged__details',
           deleteButton: '.logged__icon',
-          loggedAddError: '.logged__add_error'
+          loggedAddError: '.logged__add_error',
+          inputOwner: '.logged__add_input_owner',
+          inputMaxDebit: '.logged__add_input_maxDebit',
+          inputBalanceDebit: '.logged__add_input_balanceDebit',
+          inputBalanceCash: '.logged__add_input_balanceCash'
         }
     }
 
@@ -99,13 +103,18 @@ class AccountsView extends BaseView {
           <h2>Dodaj konto</h2>
         </div>
         <div class="logged__container_add">
-          <input class="logged__add_input_name" type='text' placeholder='Nazwa konta'/>
+          <input class="logged__add_input_name logged__add_invisible" type='text' placeholder='Nazwa konta'/>
+          <input class="logged__add_input_owner logged__add_invisible" type='text' placeholder='Właściciel konta'/>
           <select class="logged__add_select_type">
             <option value="" disabled selected>Wybierz rodzaj</option>
             <option value="account">account</option>
-            <option value="debitCard">debitCard</option>
+            <option value="debitCard">creditCard</option>
+            <option value="cash">cash</option>
           </select>
-          <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
+         <input class="logged__add_input_balanceDebit logged__add_invisible" type='text' placeholder='Saldo'/>
+         <input class="logged__add_input_maxDebit logged__add_invisible" type='text' placeholder='Maksymalne zadłużenie'/>
+         <input class="logged__add_input_balance logged__add_invisible" type='text' placeholder='Kwota na koncie'/>
+         <input class="logged__add_input_balanceCash logged__add_invisible" type='text' placeholder='Saldo'/>
           <h4 class="logged__add_error"></h4>
           <div class="logged__add">
             <button class="logged__button_add">+</button>
