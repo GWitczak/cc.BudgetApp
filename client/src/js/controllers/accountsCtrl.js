@@ -60,6 +60,13 @@ class AccountsCtrl {
     
     console.log(accountID);
     await this.model.deleteAccount(accountID);
+
+    const accounts = await this.model.getAccounts();
+    this.view.render(
+      this.view.el.content,
+      this.view.createAccountMarkup(accounts)
+    );
+
   }
 
   _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback) {
@@ -91,9 +98,7 @@ class AccountsCtrl {
   async init(accountClickCallback, addAccountCallback, deleteAccountCallback) {
     this.view.renderLoader(this.view.el.content);
 
-    const accounts = this.model.getAccounts();
-    console.log(account);
-    // this.model.getAccounts();
+    const accounts = await this.model.getAccounts();
     this.view.render(
       this.view.el.content,
       this.view.createAccountMarkup(accounts)

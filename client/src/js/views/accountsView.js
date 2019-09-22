@@ -18,9 +18,11 @@ class AccountsView extends BaseView {
         }
     }
 
-  createAccountMarkup(account) {
+  createAccountMarkup(accounts) {
     let recordsMarkup = ``;
-    account.forEach(record => recordsMarkup += this.displaySingleAccount(record));
+    console.log(accounts);
+
+    accounts.forEach(record => recordsMarkup += this.displaySingleAccount(record));
 
     let markup = `
       <div class="logged">
@@ -44,7 +46,7 @@ class AccountsView extends BaseView {
 
   displaySingleAccount (accountRecord) {
     return `
-      <div class="logged__account" data-id="${accountRecord.id}">
+      <div class="logged__account" data-id="${accountRecord._id}">
         <p>${accountRecord.name}</p>
         <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
       </div>

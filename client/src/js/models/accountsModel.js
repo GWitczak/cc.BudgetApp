@@ -56,8 +56,8 @@ class AccountsModel extends BaseModel {
         headers: { ...token }
       });
 
-      this.accounts = await response.json();
-      console.log(this.accounts);
+      this.usersData = await response.json();
+      this.accounts = this.usersData.wallet;
       // zwrócenie pobranych danych
       return this.accounts;
     } catch (error) {
@@ -86,7 +86,7 @@ class AccountsModel extends BaseModel {
   }
 
   async deleteAccount(accId) {
-    this.url = `${this.baseApiUrl}${deleteEndpoint}/${accId}`;
+    this.url = `${this.baseApiUrl}${this.deleteEndpoint}/${accId}`;
 
     const token = this.getAuthTokenHeaderObj();
 
