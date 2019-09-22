@@ -46,9 +46,14 @@ class AccountsView extends BaseView {
   };
 
   displaySingleAccount (accountRecord) {
+      let name = '';
+      if(!accountRecord.name)
+          name = accountRecord.owner;
+      else
+          name = accountRecord.name;
     return `
       <div class="logged__account" data-id="${accountRecord._id}">
-        <p>${accountRecord.name}</p>
+        <p>${name}</p>
         <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i></p>
       </div>
     `
@@ -97,7 +102,8 @@ class AccountsView extends BaseView {
           <input class="logged__add_input_name" type='text' placeholder='Nazwa konta'/>
           <select class="logged__add_select_type">
             <option value="" disabled selected>Wybierz rodzaj</option>
-            <option value="Oszczędnościowe">Oszczędnościowe</option>
+            <option value="account">account</option>
+            <option value="debitCard">debitCard</option>
           </select>
           <input class="logged__add_input_balance" type='text' placeholder='Kwota na koncie'/>
           <h4 class="logged__add_error"></h4>
