@@ -10,7 +10,7 @@ class AccountsModel extends BaseModel {
     this.addEndpoint = "wallet";
   }
 
-  async createAccount(type, name, balance) {
+  async createAccount(type, name, balance, balanceCash, balanceDebit, maxDebit, owner) {
     this.url = `${this.baseApiUrl}${this.addEndpoint}`;
 
     const token = this.getAuthToken();
@@ -22,7 +22,15 @@ class AccountsModel extends BaseModel {
       return await fetch(this.url, {
         method: 'POST',
         headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
-        body: JSON.stringify({type: type, balance: balance, owner: name})
+        body: JSON.stringify({type: type, balance: balanceDebit, owner: owner, maxDebit: maxDebit})
+      })
+          .then(res => {status = res.ok; return res.text()})
+          .then(res =>{ return {ok: status, statusText: res}});
+    else if(type === 'cash')
+      return await fetch(this.url, {
+        method: 'POST',
+        headers: { 'x-auth-token': token, 'Content-Type': 'application/json'},
+        body: JSON.stringify({type: type, balance: balanceCash})
       })
           .then(res => {status = res.ok; return res.text()})
           .then(res =>{ return {ok: status, statusText: res}});
