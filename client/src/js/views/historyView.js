@@ -15,32 +15,34 @@ class HistoryView extends BaseView {
         let recordsMarkup = ``;
         history.forEach(record => recordsMarkup += this._createSingleRecord(record) );
 
-        let markup = `        
-            <section class="history">
-                <div class="history__header">
-                    <h2>Historia operacji</h2>
-                </div>
-                <ul class="history__list">
-                    ${ recordsMarkup }
-                </ul>
-            </section>
-        `;
-
-        return markup;
+        let markup = `
+        <div class="logged">
+          <div class="logged__header">
+            <h2>Historia operacji</h2>
+          </div>
+          <div class="logged__container">
+            <div class="logged__accounts">
+             <h3>Najnowsze operacje:</h3>
+            </div>
+            ${ recordsMarkup }
+          </div>
+        </div>
+      `;
+      return markup;
     }
 
     _createSingleRecord(historyRecord) {
         return `
-            <li class="history__item">
+            <div class="history__item">
                 <div class="history__item-upper">
-                    <p class="history__item-title">${historyRecord.title}</p>
-                    <p class="history__item-date">${historyRecord.date}</p>
+                    <p class="history__item-title">${this._capitalize(historyRecord.title)}</p>
+                    <p class="history__item-date">${this._displayDate(historyRecord.date)}</p>
                 </div>
                 <div class="history__item-lower">
-                    <p class="history__item-category">${historyRecord.category}</p>
-                    <p class="history__item-money">${historyRecord.money}</p>
+                    <p class="history__item-category">${this._capitalize(historyRecord.category)}</p>
+                    <p class="history__item-money">${historyRecord.amount}</p>
                 </div>
-            </li>
+            </div>
         `
     }
 

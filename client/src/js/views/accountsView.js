@@ -87,10 +87,19 @@ class AccountsView extends BaseView {
         <div class="logged__accounts-details">
             <h3>Szczegóły konta</h3>
         </div>
-        <p>ID konta: ${account._id}</p>
-        <p>Kasa: ${account.balance}</p>
-        <p>Typ: ${account.type}</p>
-        <p>Historia: ${JSON.stringify(account.history)}</p>
+        <div class="history__item">
+        <div class="history__item-upper">
+            <p class="history__item-date">ID konta:</p>
+            <p class="history__item-money">${account._id}</p>
+        </div>
+        <div class="history__item-upper">
+            <p class="history__item-date">Typ konta:</p>
+            <p class="history__item-money">${this._capitalize(account.type)}</p>
+        </div>
+        <div class="history__item-upper">
+            <p class="history__item-date">Stan na dzień ${new Date().toLocaleDateString()}:</p>
+            <p class="history__item-money">${account.balance}</p>
+        </div>
       `;
 
       const el = this.getElementByElStr(this.elStr.loggedDetails);
