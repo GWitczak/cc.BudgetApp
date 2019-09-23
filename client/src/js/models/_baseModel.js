@@ -3,11 +3,6 @@ class BaseModel {
     this.baseApiUrl = "http://localhost:8000/api/";
   }
 
-  clearStorage() {
-    // localStorage.removeItem('budgetAppToken');
-    // localStorage.removeItem('user');
-  }
-
   getAuthTokenHeaderObj() {
     return { "x-auth-token": this.getAuthToken() };
   }
@@ -22,6 +17,10 @@ class BaseModel {
 
   load(what) {
     return JSON.parse(localStorage.getItem(what));
+  }
+
+  isUserLoggedIn() {
+    return localStorage.getItem("user") && localStorage.getItem("budgetAppToken");
   }
 
   getAuthToken() {

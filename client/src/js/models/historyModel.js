@@ -4,7 +4,7 @@ class HistoryModel extends BaseModel {
 
     constructor() {
         super();
-        this.endpoint = 'history';
+        this.endpoint = 'users';
     }
 
     async getHistory() {
@@ -15,13 +15,13 @@ class HistoryModel extends BaseModel {
         if (!token) return console.log('Nie możesz wysłać zapytania pod wskazany adres bez tokena autoryzującego.');
 
         try {
-            const rawData = await fetch(this.url, {
+            const rawResponse = await fetch(this.url, {
                 headers: { ...this.getAuthTokenHeaderObj() }
             });
 
-            this.history = await rawData.json();
+            const user = await rawResponse.json();
 
-            return this.history;
+            return user.history;
 
         } catch (error) {
             console.log(error);

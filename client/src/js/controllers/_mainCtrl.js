@@ -100,17 +100,25 @@ class MainCtrl {
     init() {
         console.log('Main Ctrl working...');
 
-        // Bez znaczenia na jakim Ctrl to wykonamy
-        this.historyCtrl.model.clearStorage();
-
         this.menuCtrl.init(
             this.menuClickCallback.bind(this)
         );
-        this.accountsCtrl.init(
-            this.loadAccountDetails.bind(this),
-            this.createAccount.bind(this),
-            this.addTransaction.bind(this)
-        );
+
+        if(this.menuCtrl.model.isUserLoggedIn()) {
+            this.menuCtrl.view.showHideLinks(true);
+            this.accountsCtrl.init(
+                this.loadAccountDetails.bind(this),
+                this.createAccount.bind(this),
+                this.addTransaction.bind(this)
+            );
+        } else {
+            this.menuCtrl.view.showHideLinks(false);
+            this.loginCtrl.init(
+                'login',
+                this.afterSuccesLogin.bind(this)
+            );
+        };
+
     }
 }
 

@@ -44,6 +44,14 @@ class BaseView {
         el.innerHTML = '';
     };
 
+    _capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
+
+    _displayDate(rawDate) {
+        return new Date(rawDate).toLocaleDateString();
+    }
+
 }
 
 export default BaseView;
