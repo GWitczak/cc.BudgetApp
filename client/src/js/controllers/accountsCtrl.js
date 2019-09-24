@@ -129,9 +129,11 @@ class AccountsCtrl {
     const accountEl = ev.target.closest(this.view.elStr.singleAccount);
     const accountID = accountEl ? accountEl.dataset.id : null;
     const account = await this.model.getAccountDetails(accountID);
+    let owner = 'none';
+    if (account.type === 'debitCard') owner = account.owner;
     const data = {
       accountID: accountID ,
-      cardOwner: account.owner,
+      cardOwner: owner,
       accountType: account.type
     }
     cb(data);
@@ -144,7 +146,6 @@ class AccountsCtrl {
     const addAccBtn = this.view.getElementByElStr(
       this.view.elStr.addAccountBtn
     );
-    const addTransactionBtn = this.view.getElementByElStr(this.view.elStr.addTransactionButton);
 
     loggedContainer.addEventListener("click", ev => {
       this._clickHandler(ev, accountClickCallback);
@@ -154,10 +155,14 @@ class AccountsCtrl {
       this._addAccountHandler(ev, addAccountCallback);
     });
 
-    addTransactionBtn.addEventListener('click', ev => {
-      this._addTransactionHandler(ev, addTransactionCallback);
-    })
 
+    this.addTransactionButtons= this.view.getElementsByElStr(this.view.elStr.addTransactionButton);
+    this.addTransactionButtonsArray = [].slice.call(this.addTransactionButtons);
+    this.addTransactionButtons.forEach((item) => {
+      item.addEventListener("click", ev => {
+        this._addTransactionHandler(ev, addTransactionCallback);
+      });
+    });
     //USUWANIE KONTA
     this.deleteButtons = this.view.getElementsByElStr(this.view.elStr.deleteButton);
     this.deleteButtonsArray = [].slice.call(this.deleteButtons);
