@@ -1,3 +1,6 @@
+import BaseView from '../views/_baseView';
+import BaseModel from '../models/_baseModel';
+
 import MenuCtrl from '../controllers/menuCtrl';
 import HistoryCtrl from '../controllers/historyCtrl';
 import AccountsCtrl from './accountsCtrl';
@@ -6,6 +9,9 @@ import LoginCtrl from './loginCtrl';
 
 class MainCtrl {
     constructor() {
+        this.baseView = new BaseView();
+        this.baseModel = new BaseModel();
+        
         this.menuCtrl = new MenuCtrl();
         this.historyCtrl = new HistoryCtrl();
         this.transactionsCtrl = new TransactionsCtrl();
@@ -48,12 +54,9 @@ class MainCtrl {
             this.loadAccountDetails.bind(this)
         );     
     }
-    // Tutaj callback jest przydatny -> MenuCtrl ustawia listenera na elementach menu,
-    // po czym wysyła do MainCtrl informacje o tym co zostało kliknięte (params),
-    // na podstawie tych informacji możemy z poziomu MainCtrl inicjalizowac odpowiednie kontrolery
-    // np. historyCtrl.init() i w init() mamy możliwosc przekazania kolejnych callbacków
-    menuClickCallback(linkStr) {
 
+    menuClickCallback(linkStr) {
+        
         switch(linkStr) {
             case 'history':
                 this.historyCtrl.init(
@@ -77,14 +80,17 @@ class MainCtrl {
                 );
             break;
 
-
-            case '...':
-                // odpowiedniCtrl.init(ewentualny callback);
+            case 'logout':
+                this.baseModel.onLogout();
+                this.menuCtrl.view.showHideLinks(false);
+                this.loginCtrl.init(
+                    'login',
+                    this.afterSuccesLogin.bind(this)
+                );
             break;
-
         }
-
     }
+
     afterTransaction() {
         this.accountsCtrl.init(
             this.loadAccountDetails.bind(this),
@@ -104,7 +110,7 @@ class MainCtrl {
             this.menuClickCallback.bind(this)
         );
 
-        if(this.menuCtrl.model.isUserLoggedIn()) {
+        if(this.baseModel.isUserLoggedIn()) {
             this.menuCtrl.view.showHideLinks(true);
             this.accountsCtrl.init(
                 this.loadAccountDetails.bind(this),

@@ -12,18 +12,18 @@ class MenuView extends BaseView {
             jsAccounts: '.js-accounts',
             jsTransfer: '.js-transfer',
             jsHistory: '.js-history',
+            jsHistory: '.js-history',
+            jsQuit: '.js-quit',
         }
     };
 
     showHideLinks(isLogged) {
-
-        // Powinnismy tutaj USUWAĆ elementy, a nie je ukrywać
-        // TODO
-        this.getElementByElStr(this.elStr.jsLogin).style.display = isLogged ? 'none' : 'inline-block' ;
-        this.getElementByElStr(this.elStr.jsRegister).style.display = isLogged ? 'none' : 'inline-block';
-        this.getElementByElStr(this.elStr.jsAccounts).style.display = isLogged ? 'inline-block' : 'none';
-        this.getElementByElStr(this.elStr.jsTransfer).style.display = isLogged ? 'inline-block' : 'none';
-        this.getElementByElStr(this.elStr.jsHistory).style.display = isLogged ? 'inline-block' : 'none';
+        this.getElementByElStr(this.elStr.jsLogin).style.display = isLogged ? 'none' : 'block' ;
+        this.getElementByElStr(this.elStr.jsRegister).style.display = isLogged ? 'none' : 'block';
+        this.getElementByElStr(this.elStr.jsAccounts).style.display = isLogged ? 'block' : 'none';
+        this.getElementByElStr(this.elStr.jsTransfer).style.display = isLogged ? 'block' : 'none';
+        this.getElementByElStr(this.elStr.jsHistory).style.display = isLogged ? 'block' : 'none';
+        this.getElementByElStr(this.elStr.jsQuit).style.display = isLogged ? 'block' : 'none';
     }
 }
 
