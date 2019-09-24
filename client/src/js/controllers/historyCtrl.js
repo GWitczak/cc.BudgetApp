@@ -16,8 +16,7 @@ class HistoryCtrl {
     // }
 
     async init(menuClickCallback) {
-        console.log('History Ctrl working...')
-    
+        console.log('History Ctrl working...')    
         this.view.renderLoader(this.view.el.content);
 
         const history = await this.model.getHistory(); 

@@ -7,7 +7,8 @@ class HistoryView extends BaseView {
 
         this.elStr = {
             history: 'history',
-            historyMoreBtn: 'history__more-info'
+            historyMoreBtn: 'history__more-info',
+            historyItem: 'history__item'
         }
     };
 
@@ -21,9 +22,6 @@ class HistoryView extends BaseView {
             <h2>Historia operacji</h2>
           </div>
           <div class="logged__container">
-            <div class="logged__accounts">
-             <h3>Najnowsze operacje:</h3>
-            </div>
             ${ recordsMarkup }
           </div>
         </div>
@@ -33,7 +31,7 @@ class HistoryView extends BaseView {
 
     _createSingleRecord(historyRecord) {
         return `
-            <div class="history__item">
+            <div class="history__item ">
                 <div class="history__item-upper">
                     <p class="history__item-title">${this._capitalize(historyRecord.title)}</p>
                     <p class="history__item-date">${this._displayDate(historyRecord.date)}</p>
