@@ -26,16 +26,21 @@
     // tutaj chcę zrobić losowo wyświetlające się kolory backgroundu z tablicy kolorów
     // ale póki co czytam i próbuję jak to zrobić
     &__account {
-        font-size: 2.2rem;
+        font-size:  1.8rem;
         height: 6.5rem;
         color: var(--color-text);
         background-color: var(--color-primary-light);
-        padding: 0 4rem;
+        padding: 0 2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid var(--color-gray-1);
         transition: background-color .3s;
+
+        @media screen and (min-width: 50em) {
+            font-size: 2.2rem;
+            padding: 0 4rem;
+        }
 
 
         &:hover {
@@ -46,7 +51,11 @@
 
 
     &__account > :last-child {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
+
+        @media screen and (min-width: 50em) {
+            font-size: 2.2rem;
+        }
     }
 
     &__button {
@@ -99,81 +108,32 @@
     }
 
     &__add_input_name {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
     }
 
     &__add_select_type {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
         color: var(--color-gray-5);
     }
 
     &__add_input_balance {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
     }
 
     &__add_input_balanceDebit {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
     }
 
     &__add_input_balanceCash {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
     }
 
     &__add_input_maxDebit {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
     }
 
     &__add_input_owner {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
     }
 
     &__add_error {
@@ -183,25 +143,12 @@
     }
 
     &__add_select_category {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
-        box-sizing: border-box;
+        @include chooseBox;
         color: var(--color-gray-5);
     }
 
     &__add_input_amount {
-        font-size: 1.8rem;
-        width: 100%;
-        border: none;
-        margin: 1rem 0;
-        padding: 14px 18px;
-        border-radius: 3px;
-        height: 6.5rem;
+        @include chooseBox;
         box-sizing: border-box;
     }
     &__add_invisible {
@@ -211,5 +158,9 @@
     }
 
     h3 {
-        font-size: 2.3rem;
+        font-size: 2rem;
+
+        @media screen and (min-width: 50em) {
+            font-size: 2.3rem;
+        }
     }

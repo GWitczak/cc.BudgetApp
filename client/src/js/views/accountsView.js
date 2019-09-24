@@ -40,10 +40,10 @@ class AccountsView extends BaseView {
            <h3>Twoje konta</h3>
           </div>
           ${ recordsMarkup }
-          <div class="logged__details"></div>
           <div class="logged__add">
             <button class="logged__button">+</button>
           </div>
+          <div class="logged__details"></div>
         </div>
       </div>
     `;
@@ -97,7 +97,7 @@ class AccountsView extends BaseView {
             <p class="history__item-money">${this._capitalize(account.type)}</p>
         </div>
         <div class="history__item-upper">
-            <p class="history__item-date">Stan na dzień ${new Date().toLocaleDateString()}:</p>
+            <p class="history__item-date">Stan na dzień <br> ${new Date().toLocaleDateString()}:</p>
             <p class="history__item-money">${account.balance}</p>
         </div>
       `;

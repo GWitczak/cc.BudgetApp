@@ -30,7 +30,11 @@
         font-size: 3.5rem;
         position: absolute;
         top: 1.5rem;
-        left: 6rem;
+        right: 10%;
+
+        @media screen and (min-width: 50em){
+            left: 10%;
+        }
     };
 }
 
