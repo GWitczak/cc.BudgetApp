@@ -26,6 +26,11 @@ class BaseModel {
   getAuthToken() {
     return localStorage.getItem("budgetAppToken");
   }
+
+  onLogout() {
+      localStorage.removeItem("user");
+      localStorage.removeItem("budgetAppToken");
+  }
 }
 
 export default BaseModel;
