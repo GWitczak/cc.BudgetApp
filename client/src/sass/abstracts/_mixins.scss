@@ -19,3 +19,14 @@
     width: 90%;
     padding: 5rem;
 }
+
+@mixin chooseBox {
+    font-size: 1.8rem;
+        width: 100%;
+        border: none;
+        margin: 1rem 0;
+        padding: 14px 18px;
+        border-radius: 3px;
+        height: 6.5rem;
+        box-sizing: border-box;
+}

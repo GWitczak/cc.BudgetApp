@@ -23,8 +23,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 4rem;
-        min-height: 4.5rem;
+        padding: 0 2rem;
+        min-height: 5.5rem;
+
+        @media screen and (min-width: 50em) {
+            padding: 0 4rem;
+        }
     }
     &__item-upper {
         &:not(:last-child) {
@@ -34,8 +38,11 @@
 
     &__item-title,
     &__item-money {
-        font-size: 2.5rem;
-        font-weight: bold;
+        font-size: 1.4rem;
+
+        @media screen and (min-width: 50em) {
+            font-size: 2rem;
+        }
     }
 
     &__item-date,

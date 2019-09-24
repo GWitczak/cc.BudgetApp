@@ -40,10 +40,10 @@ class AccountsView extends BaseView {
            <h3>Twoje konta</h3>
           </div>
           ${ recordsMarkup }
-          <div class="logged__details"></div>
           <div class="logged__add">
             <button class="logged__button">+</button>
           </div>
+          <div class="logged__details"></div>
         </div>
       </div>
     `;
