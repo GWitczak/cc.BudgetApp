@@ -11,6 +11,8 @@ class MenuCtrl {
     _clickHandler(ev, mainCtrlCallback) {
         ev.preventDefault();
 
+        if(ev.target.classList.contains('off')) return mainCtrlCallback('logout')
+
         // Wewnętrzna logika
         const link = ev.target.closest(`${this.view.elStr.menuLink}`);
         if (!link) return;
