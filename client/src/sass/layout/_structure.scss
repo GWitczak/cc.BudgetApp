@@ -1,8 +1,5 @@
-body {
-    padding: 0;
-}
-
 .content {
+    min-height: calc(100vh - 8rem);
     background-image: url(../../assets/logged.jpg);
     background-repeat: no-repeat;
     background-size: cover;
