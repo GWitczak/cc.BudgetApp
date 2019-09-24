@@ -138,12 +138,8 @@ class AccountsCtrl {
   }
 
   _setListeners(accountClickCallback, addAccountCallback, deleteAccountCallback, addTransactionCallback) {
-    const loggedContainer = this.view.getElementByElStr(
-      this.view.elStr.loggedContainer
-    );
-    const addAccBtn = this.view.getElementByElStr(
-      this.view.elStr.addAccountBtn
-    );
+    const loggedContainer = this.view.getElementByElStr(this.view.elStr.loggedContainer);
+    const addAccBtn = this.view.getElementByElStr(this.view.elStr.addAccountBtn);
     const addTransactionBtn = this.view.getElementByElStr(this.view.elStr.addTransactionButton);
 
     loggedContainer.addEventListener("click", ev => {
