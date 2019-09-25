@@ -38,7 +38,7 @@ class HistoryView extends BaseView {
                     <p class="history__item-date">${ historyRecord.date ? this._displayDate(historyRecord.date) : '' }</p>
                 </div>
                 <div class="history__item-lower">
-                    <p class="history__item-category">${ historyRecord.category ? this._capitalize(historyRecord.category) : ''}</p>
+                    <p class="history__item-category">${ historyRecord.category ? this._capitalize(historyRecord.category) : '' }</p>
                     <p class="history__item-money">${sign}${historyRecord.amount}$</p>
                 </div>
             </div>
