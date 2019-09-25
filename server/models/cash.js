@@ -7,6 +7,10 @@ const cashSchema = new mongoose.Schema({
     required: true,
     match: /cash/
   }, 
+  name: {
+    type: String,
+    required: true,
+  },
   balance: {
     type: Number,
     default: 0,
@@ -26,6 +30,7 @@ cashSchema.statics.create = function (cash, res) {
 
   return new Cash({ 
     type: cash.type,
+    name: "Gotówka",
     balance: cash.balance,
   });
 }
@@ -41,6 +46,7 @@ const Cash = mongoose.model('Cash', cashSchema);
 function validateCash(cash) {
   const schema = {
     type: "cash",
+    name: Joi.string(),
     balance: Joi.number().min(0).required()
   };
 

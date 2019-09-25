@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
         let transaction = Transaction.create(req, res);
         if (req.body.accountType === 'debitCard') {
             if (req.body.amount < debit - accountBalance) {
-                accountBalance = accountBalance + transaction.amount;
+                accountBalance = accountBalance - transaction.amount;
             } else return res.status(404).send("You don't have enough debit to complete payment.");
         }
         else if (req.body.type === 'Wydatek' && req.body.accountType !== 'debitCard') {

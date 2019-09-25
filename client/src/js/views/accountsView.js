@@ -53,13 +53,13 @@ class AccountsView extends BaseView {
   displaySingleAccount (accountRecord) {
       let name = '';
       if(!accountRecord.name)
-          name = accountRecord.owner;
+          name = `Karta Kredytowa (${accountRecord.owner})`;
       else
           name = accountRecord.name;
     return `
       <div class="logged__account" data-id="${accountRecord._id}">
         <p>${name}</p>
-        <p>${accountRecord.balance} <i class="logged__icon trash alternate icon"></i>
+        <p>${accountRecord.balance}$ <i class="logged__icon trash alternate icon"></i>
         <i class="logged__icon_add add alternate icon"></i></p>
       </div>
     `
@@ -100,10 +100,10 @@ class AccountsView extends BaseView {
             </div>
             <div class="history__item-upper">
                 <p class="history__item-date">Stan na dzień ${new Date().toLocaleDateString()}:</p>
-                <p class="history__item-money">${account.balance}</p>
+                <p class="history__item-money">${account.balance}$</p>
             </div>
         </div>
-        ${ gotHistory ? this._renderHistory(test) : '' }
+        ${ gotHistory ? this._renderHistory(account.history) : '' }
     `;
       const el = this.getElementByElStr(this.elStr.loggedDetails);
       this.render(el, markup);
