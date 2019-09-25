@@ -20,6 +20,7 @@ router.post('/', auth, async (req, res) => {
         return element._id == accountTo;
     });
     
+    req.body.amount = parseInt(req.body.amount);
 
     try {
         let transfer = Transfer.create(req, res);
@@ -28,9 +29,6 @@ router.post('/', auth, async (req, res) => {
         } else if (req.body.amount > user.wallet[idx1].balance) {
             return res.status(404).send("There is not enought money on sending account.");
         } else {
-            console.log('req.body.amount: '+req.body.amount);
-            console.log('user.wallet[idx2].balance: '+user.wallet[idx2].balance);
-            
             user.wallet[idx1].balance = user.wallet[idx1].balance - req.body.amount;
             user.wallet[idx2].balance = user.wallet[idx2].balance + req.body.amount;
         }
