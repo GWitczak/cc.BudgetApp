@@ -30,7 +30,13 @@ class HistoryView extends BaseView {
     }
 
     _createSingleRecord(historyRecord) {
-        const sign = historyRecord.type === "Wydatek" ? '-' : '+';
+        let sign = ''; 
+        if (historyRecord.type === "Wydatek") {
+            sign = '-';
+        } else if (historyRecord.type === "Przychod") {
+            sign = '+';
+        }
+
         return `
             <div class="history__item ">
                 <div class="history__item-upper">

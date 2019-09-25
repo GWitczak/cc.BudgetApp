@@ -26,7 +26,6 @@ class AccountsView extends BaseView {
 
   createAccountMarkup(accounts) {
     let recordsMarkup = ``;
-    console.log(accounts);
 
     accounts.forEach(record => recordsMarkup += this.displaySingleAccount(record));
 
@@ -153,7 +152,12 @@ class AccountsView extends BaseView {
   }
 
   _createSingleHistoryRecord(historyRecord) {
-    const sign = historyRecord.type === "Wydatek" ? '-' : '+';
+    let sign = ''; 
+        if (historyRecord.type === "Wydatek") {
+            sign = '-';
+        } else if (historyRecord.type === "Przychod") {
+            sign = '+';
+        }
     return `
         <div class="history__item">
             <div class="history__item-upper">
