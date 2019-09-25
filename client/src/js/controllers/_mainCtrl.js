@@ -6,6 +6,7 @@ import HistoryCtrl from '../controllers/historyCtrl';
 import AccountsCtrl from './accountsCtrl';
 import TransactionsCtrl from './transactionsCtrl';
 import LoginCtrl from './loginCtrl';
+import TransfersCtrl from './transfersCtrl';
 
 class MainCtrl {
     constructor() {
@@ -17,6 +18,7 @@ class MainCtrl {
         this.transactionsCtrl = new TransactionsCtrl();
         this.accountsCtrl = new AccountsCtrl();
         this.loginCtrl = new LoginCtrl();
+        this.transfersCtrl = new  TransfersCtrl();
     }
 
     afterSuccesLogin(isUserLogged) {
@@ -64,6 +66,12 @@ class MainCtrl {
                 );
             break;
 
+            case 'transfer':
+                this.transfersCtrl.init(
+                    this.addTransfer.bind(this)
+                );
+            break;
+
             case 'accounts':
                 this.accountsCtrl.init(
                     this.loadAccountDetails.bind(this),
@@ -102,6 +110,11 @@ class MainCtrl {
     addTransaction(data) {
         this.transactionsCtrl.init(data, this.afterTransaction.bind(this));
     }
+
+    addTransfer(data){
+        this.transfersCtrl.init(data);
+    }
+    
 
     init() {
         console.log('Main Ctrl working...');
