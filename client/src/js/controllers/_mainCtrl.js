@@ -112,7 +112,12 @@ class MainCtrl {
     }
 
     addTransfer(data){
-        this.transfersCtrl.init(data);
+        // this.transfersCtrl.init(data);
+        this.accountsCtrl.init(
+            this.loadAccountDetails.bind(this),
+            this.createAccount.bind(this),
+            this.addTransaction.bind(this)
+        );
     }
     
 
