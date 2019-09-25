@@ -84,7 +84,11 @@ class AccountsView extends BaseView {
 
   showDetails(account) {
     const gotHistory = account.history.length > 0;
-
+    let type;
+    if (account.type === 'account') type = 'Konto Bankowe';
+    else {
+      type = account.type === 'debitCard' ? 'Karta Kredytowa' : 'Gotówka';
+    }
     const markup = `
         <div class="logged__accounts-details">
             <h3>Szczegóły konta</h3>
@@ -95,8 +99,8 @@ class AccountsView extends BaseView {
                 <p class="history__item-money">${account._id}</p>
             </div>
             <div class="history__item-upper">
-                <p class="history__item-date">Typ konta:</p>
-                <p class="history__item-money">${this._capitalize(account.type)}</p>
+                <p class="history__item-date">Typ:</p>
+                <p class="history__item-money">${type}</p>
             </div>
             <div class="history__item-upper">
                 <p class="history__item-date">Stan na dzień ${new Date().toLocaleDateString()}:</p>
@@ -116,14 +120,14 @@ class AccountsView extends BaseView {
                 <h2>Dodaj konto</h2>
             </div>
             <div class="logged__container_add">
-                <input class="logged__add_input_name logged__add_invisible" type='text' placeholder='Nazwa konta'/>
-                <input class="logged__add_input_owner logged__add_invisible" type='text' placeholder='Właściciel konta'/>
                 <select class="logged__add_select_type">
                     <option value="" disabled selected>Wybierz rodzaj</option>
-                    <option value="account">account</option>
-                    <option value="debitCard">creditCard</option>
-                    <option value="cash">cash</option>
+                    <option value="account">Konto Bankowe</option>
+                    <option value="debitCard">Karta Kredytowa</option>
+                    <option value="cash">Gotówka</option>
                 </select>
+                <input class="logged__add_input_name logged__add_invisible" type='text' placeholder='Nazwa konta'/>
+                <input class="logged__add_input_owner logged__add_invisible" type='text' placeholder='Właściciel konta'/>
                 <input class="logged__add_input_balanceDebit logged__add_invisible" type='text' placeholder='Saldo'/>
                 <input class="logged__add_input_maxDebit logged__add_invisible" type='text' placeholder='Maksymalne zadłużenie'/>
                 <input class="logged__add_input_balance logged__add_invisible" type='text' placeholder='Kwota na koncie'/>
@@ -149,6 +153,7 @@ class AccountsView extends BaseView {
   }
 
   _createSingleHistoryRecord(historyRecord) {
+    const sign = historyRecord.type === "Wydatek" ? '-' : '+';
     return `
         <div class="history__item">
             <div class="history__item-upper">
@@ -157,7 +162,7 @@ class AccountsView extends BaseView {
             </div>
             <div class="history__item-lower">
                 <p class="history__item-category">${this._capitalize(historyRecord.category)}</p>
-                <p class="history__item-money">${historyRecord.amount}</p>
+                <p class="history__item-money">${sign}${historyRecord.amount}$</p>
             </div>
         </div>
     `

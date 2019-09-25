@@ -20,7 +20,7 @@ class HistoryModel extends BaseModel {
             });
 
             const user = await rawResponse.json();
-
+            console.log(user.history);
             return user.history;
 
         } catch (error) {

@@ -30,6 +30,7 @@ class HistoryView extends BaseView {
     }
 
     _createSingleRecord(historyRecord) {
+        const sign = historyRecord.type === "Wydatek" ? '-' : '+';
         return `
             <div class="history__item ">
                 <div class="history__item-upper">
@@ -38,7 +39,7 @@ class HistoryView extends BaseView {
                 </div>
                 <div class="history__item-lower">
                     <p class="history__item-category">${this._capitalize(historyRecord.category)}</p>
-                    <p class="history__item-money">${historyRecord.amount}</p>
+                    <p class="history__item-money">${sign}${historyRecord.amount}$</p>
                 </div>
             </div>
         `
