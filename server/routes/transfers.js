@@ -20,6 +20,7 @@ router.post('/', auth, async (req, res) => {
         return element._id == accountTo;
     });
     
+    req.body.amount = parseInt(req.body.amount);
 
     try {
         let transfer = Transfer.create(req, res);

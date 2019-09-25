@@ -151,6 +151,18 @@
         @include chooseBox;
         box-sizing: border-box;
     }
+    &__add_input_title {
+        @include chooseBox;
+        box-sizing: border-box;
+    }
+    &__add_input_acc-from {
+        @include chooseBox;
+        box-sizing: border-box;
+    }
+    &__add_input_acc-to {
+        @include chooseBox;
+        box-sizing: border-box;
+    }
     &__add_invisible {
         display: none;
     }
